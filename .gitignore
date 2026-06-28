@@ -1,0 +1,15 @@
+# Node
+node_modules/
+npm-debug.log*
+
+# Entornos (¡CRUCIAL PARA NO FILTRAR CREDENCIALES DE GOOGLE!)
+.env
+.env.*
+!.env.example
+
+# Builds (Vite)
+dist/
+build/
+
+# SO
+.DS_Store
