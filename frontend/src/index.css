@@ -1,16 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-light: #f4f4f5;
-  --color-brand: #18181b;
-  --color-brand-dark: #09090b;
-  --color-accent: #10b981;
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
 }
+
+@variant dark (&:where(.dark, .dark *));
 
 @layer base {
   body {
-    background-color: var(--color-brand-light);
-    color: var(--color-brand);
-    font-family: 'Inter', system-ui, sans-serif;
+    @apply font-sans antialiased;
   }
 }
