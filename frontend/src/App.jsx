@@ -133,7 +133,7 @@ const AboutPage = () => (
           </button>
         </div>
         <div className="md:w-1/3 flex justify-center">
-          <img src="/imagenes/Logo_memoria_mundial.png" className="h-32 w-auto opacity-80 dark:opacity-60" alt="Logo de fondo" />
+          <img src="/imagenes/logo.webp" className="h-32 w-auto opacity-80 dark:opacity-60" alt="Logo de fondo" />
         </div>
       </div>
     </div>
@@ -269,7 +269,7 @@ export default function App() {
               }}
               className="flex flex-shrink-0 items-center gap-3 transition-transform hover:scale-105"
             >
-              <img src="/imagenes/Logo_memoria_mundial.png" className="h-16 w-auto" alt="Memoria Mundial Logo" />
+              <img src="/imagenes/logo.webp" className="h-16 w-auto" alt="Memoria Mundial Logo" />
               <span className="font-serif text-sm font-medium tracking-wider text-stone-600 dark:text-stone-400">Memoria del Mundial</span>
             </a>
             
@@ -321,7 +321,7 @@ export default function App() {
                 {/* Imagen de fondo local sin blur */}
                 <div 
                   className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-                  style={{ backgroundImage: "url('/imagenes/hero-banner.jpg')", backgroundPosition: "center 10%" }}
+                  style={{ backgroundImage: "url('/imagenes/hero-banner.webp')", backgroundPosition: "center 10%" }}
                 />
                 {/* Overlay oscuro ligero para máxima nitidez */}
                 <div className="absolute inset-0 bg-black/30" />
