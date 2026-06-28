@@ -6,6 +6,7 @@ import {
   Moon,
   X
 } from 'lucide-react';
+import { temas } from './data';
 
 const FILTER_THEMES = [
   'Tecnologías', 'Expresión cultural', 'Discurso de odio', 'Origen de los jugadores', 
@@ -14,158 +15,41 @@ const FILTER_THEMES = [
   'Monopolio', 'Festejo', 'Publicidad', 'Cobertura de medios'
 ];
 
-const ARCHIVE_ITEMS = [
-  {
-    id: 1,
-    img: '/imagenes/imagen_1.jpg',
-    heightClass: 'h-64',
-    bgLight: 'bg-stone-100',
-    bgDark: 'dark:bg-stone-900',
-    title: 'Tecnologías',
-    description: 'Comparación (1970 / 1986 - 2026) en México.',
-    tag: 'Investigación'
-  },
-  {
-    id: 2,
-    img: '/imagenes/imagen_2.jpg',
-    heightClass: 'h-80',
-    bgLight: 'bg-slate-100',
-    bgDark: 'dark:bg-slate-900',
-    title: 'Expresión cultural',
-    description: 'Expresión cultural e identidad (memes, etc.).',
-    tag: 'Cultura'
-  },
-  {
-    id: 3,
-    img: '/imagenes/imagen_3.jpg',
-    heightClass: 'h-48',
-    bgLight: 'bg-gray-100',
-    bgDark: 'dark:bg-gray-900',
-    title: 'Discurso de odio',
-    description: 'Discurso de odio en Copas: Nacionalismo y prejuicios.',
-    tag: 'Sociedad'
-  },
-  {
-    id: 4,
-    img: '/imagenes/imagen_4.jpg',
-    heightClass: 'h-72',
-    bgLight: 'bg-zinc-100',
-    bgDark: 'dark:bg-zinc-900',
-    title: 'Origen de los jugadores',
-    description: 'Nacionales vs. extranjeros.',
-    tag: 'Deporte'
-  },
-  {
-    id: 5,
-    img: '/imagenes/imagen_5.jpg',
-    heightClass: 'h-56',
-    bgLight: 'bg-neutral-100',
-    bgDark: 'dark:bg-neutral-900',
-    title: 'Fast Fashion',
-    description: 'Huella de carbono y Clima.',
-    tag: 'Medio Ambiente'
-  },
-  {
-    id: 6,
-    img: '/imagenes/imagen_6.jpg',
-    heightClass: 'h-80',
-    bgLight: 'bg-stone-100',
-    bgDark: 'dark:bg-stone-900',
-    title: 'Género / Feminismo',
-    description: 'Jugadoras y Violencia sexual.',
-    tag: 'Derechos'
-  },
-  {
-    id: 7,
-    img: '/imagenes/imagen_7.jpg',
-    heightClass: 'h-64',
-    bgLight: 'bg-slate-100',
-    bgDark: 'dark:bg-slate-900',
-    title: 'Desaparecidos',
-    description: 'Visibilización de desaparecidos en México (ejemplos en EE. UU. y Canadá).',
-    tag: 'Derechos Humanos'
-  },
-  {
-    id: 8,
-    img: '/imagenes/imagen_8.jpg',
-    heightClass: 'h-48',
-    bgLight: 'bg-gray-100',
-    bgDark: 'dark:bg-gray-900',
-    title: 'Álbum Panini',
-    description: 'El fenómeno del Álbum Panini.',
-    tag: 'Cultura Popular'
-  },
-  {
-    id: 9,
-    img: '/imagenes/imagen_9.jpg',
-    heightClass: 'h-72',
-    bgLight: 'bg-zinc-100',
-    bgDark: 'dark:bg-zinc-900',
-    title: 'Irán y guerras',
-    description: 'Irán y guerras globales.',
-    tag: 'Geopolítica'
-  },
-  {
-    id: 10,
-    img: '/imagenes/imagen_10.jpg',
-    heightClass: 'h-56',
-    bgLight: 'bg-neutral-100',
-    bgDark: 'dark:bg-neutral-900',
-    title: 'Apuestas deportivas',
-    description: 'Apuestas deportivas.',
-    tag: 'Economía'
-  },
-  {
-    id: 11,
-    img: '/imagenes/imagen_11.jpg',
-    heightClass: 'h-80',
-    bgLight: 'bg-stone-100',
-    bgDark: 'dark:bg-stone-900',
-    title: 'Desigualdad estructural',
-    description: 'Desigualdad estructural.',
-    tag: 'Sociedad'
-  },
-  {
-    id: 12,
-    img: '/imagenes/imagen_12.jpg',
-    heightClass: 'h-64',
-    bgLight: 'bg-slate-100',
-    bgDark: 'dark:bg-slate-900',
-    title: 'Monopolio',
-    description: 'Hipercomercialización y Merchandising.',
-    tag: 'Economía'
-  },
-  {
-    id: 13,
-    img: '/imagenes/imagen_13.jpg',
-    heightClass: 'h-48',
-    bgLight: 'bg-gray-100',
-    bgDark: 'dark:bg-gray-900',
-    title: 'Festejo',
-    description: 'Festejo y Destrozos.',
-    tag: 'Sociedad'
-  },
-  {
-    id: 14,
-    img: '/imagenes/imagen_14.jpg',
-    heightClass: 'h-72',
-    bgLight: 'bg-zinc-100',
-    bgDark: 'dark:bg-zinc-900',
-    title: 'Publicidad',
-    description: 'Publicidad (integrada).',
-    tag: 'Comunicación'
-  },
-  {
-    id: 15,
-    img: '/imagenes/imagen_15.jpg',
-    heightClass: 'h-56',
-    bgLight: 'bg-neutral-100',
-    bgDark: 'dark:bg-neutral-900',
-    title: 'Cobertura de medios',
-    description: 'Cobertura de los medios.',
-    tag: 'Medios'
-  }
-];
+const themeDetails = {
+  1: { tag: 'Investigación', descripcion: 'Comparación (1970 / 1986 - 2026) en México.' },
+  2: { tag: 'Cultura', descripcion: 'Expresión cultural e identidad (memes, etc.).' },
+  3: { tag: 'Sociedad', descripcion: 'Discurso de odio en Copas: Nacionalismo y prejuicios.' },
+  4: { tag: 'Deporte', descripcion: 'Nacionales vs. extranjeros.' },
+  5: { tag: 'Medio Ambiente', descripcion: 'Huella de carbono y Clima.' },
+  6: { tag: 'Derechos', descripcion: 'Jugadoras y Violencia sexual.' },
+  7: { tag: 'Derechos Humanos', descripcion: 'Visibilización de desaparecidos en México (ejemplos en EE. UU. y Canadá).' },
+  8: { tag: 'Cultura Popular', descripcion: 'El fenómeno del Álbum Panini.' },
+  9: { tag: 'Geopolítica', descripcion: 'Irán y guerras globales.' },
+  10: { tag: 'Economía', descripcion: 'Apuestas deportivas.' },
+  11: { tag: 'Sociedad', descripcion: 'Desigualdad estructural.' },
+  12: { tag: 'Economía', descripcion: 'Hipercomercialización y Merchandising.' },
+  13: { tag: 'Sociedad', descripcion: 'Festejo y Destrozos.' },
+  14: { tag: 'Comunicación', descripcion: 'Publicidad (integrada).' },
+  15: { tag: 'Medios', descripcion: 'Cobertura de los medios.' }
+};
+
+const heights = ['h-64', 'h-80', 'h-96'];
+const bgLights = ['bg-stone-100', 'bg-slate-100', 'bg-gray-100', 'bg-zinc-100', 'bg-neutral-100'];
+const bgDarks = ['dark:bg-stone-900', 'dark:bg-slate-900', 'dark:bg-gray-900', 'dark:bg-zinc-900', 'dark:bg-neutral-900'];
+
+const archiveItems = temas.map((t) => {
+  const details = themeDetails[t.id] || { tag: 'Archivo', descripcion: '' };
+  return {
+    id: t.id,
+    img: t.imagen,
+    title: t.titulo,
+    description: details.descripcion,
+    tag: details.tag,
+    heightClass: heights[t.id % heights.length],
+    bgLight: bgLights[t.id % bgLights.length],
+    bgDark: bgDarks[t.id % bgDarks.length]
+  };
+});
 
 const MethodologyPage = () => (
   <div className="max-w-4xl mx-auto px-6 py-16 animate-fade-in">
@@ -264,6 +148,7 @@ export default function App() {
   const [suggestions, setSuggestions] = useState([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  const [loadedImages, setLoadedImages] = useState({});
   
   const searchContainerRef = useRef(null);
 
@@ -336,7 +221,7 @@ export default function App() {
   };
 
   // Filter items based on selectedFilter (category) and searchQuery (typed query)
-  const filteredItems = ARCHIVE_ITEMS.filter((item) => {
+  const filteredItems = archiveItems.filter((item) => {
     const matchesFilter = selectedFilter ? item.title === selectedFilter : true;
     const matchesSearch = searchQuery.trim() !== '' 
       ? (item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -571,8 +456,9 @@ export default function App() {
                           <img 
                             src={item.img} 
                             alt={item.title} 
-                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-in-out ${loadedImages[item.id] ? 'opacity-100 blur-none' : 'opacity-0 blur-md scale-110'}`}
                             loading="lazy"
+                            onLoad={() => setLoadedImages(prev => ({ ...prev, [item.id]: true }))}
                           />
                         </div>
                         <div className="p-5">
