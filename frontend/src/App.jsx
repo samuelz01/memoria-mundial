@@ -1,93 +1,271 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Library, 
-  MapPin, 
-  Users, 
-  MonitorPlay, 
-  MessageSquareWarning, 
+  Search,
   ArrowRight,
   Sun,
-  Moon
+  Moon,
+  X
 } from 'lucide-react';
 
-const THEMES = [
-  {
-    title: 'Apuestas Deportivas',
-    description: 'Análisis del monopolio de plataformas de apuestas y la hipercomercialización del deporte.',
-    badge: 'Economía',
-    badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
-    icon: <Library className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-  },
-  {
-    title: 'Desigualdad Estructural',
-    description: 'Impacto en la gentrificación, limpieza social y el precio excluyente de los boletos.',
-    badge: 'Sociedad',
-    badgeColor: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
-    icon: <MapPin className="w-6 h-6 text-rose-600 dark:text-rose-400" />
-  },
-  {
-    title: 'Género y Feminismo',
-    description: 'Condiciones de las jugadoras, dinámicas de acoso y violencia en el ecosistema del fútbol.',
-    badge: 'Derechos',
-    badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
-    icon: <Users className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-  },
-  {
-    title: 'Tecnologías y Control',
-    description: 'Comparativa histórica de infraestructuras de vigilancia y medios entre 1986 y 2026.',
-    badge: 'Historia',
-    badgeColor: 'bg-rose-100 text-rose-700 dark:bg-rose-900/30 dark:text-rose-400',
-    icon: <MonitorPlay className="w-6 h-6 text-rose-600 dark:text-rose-400" />
-  },
-  {
-    title: 'Discursos de Odio',
-    description: 'Racismo, clasismo y xenofobia amplificados en redes sociales durante el megaevento.',
-    badge: 'Cultura Digital',
-    badgeColor: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400',
-    icon: <MessageSquareWarning className="w-6 h-6 text-emerald-600 dark:text-emerald-400" />
-  }
+const FILTER_THEMES = [
+  'Tecnologías', 'Expresión cultural', 'Discurso de odio', 'Origen de los jugadores', 
+  'Fast Fashion', 'Género / Feminismo', 'Desaparecidos', 'Álbum Panini', 
+  'Irán y guerras', 'Apuestas deportivas', 'Desigualdad estructural', 
+  'Monopolio', 'Festejo', 'Publicidad', 'Cobertura de medios'
 ];
 
 const ARCHIVE_ITEMS = [
   {
     id: 1,
     img: '/imagenes/imagen_1.jpg',
-    title: 'Título de la Investigación aquí',
-    description: 'Aquí se visualizará el resumen del documento extraído de Google Drive, con los metadatos relevantes del archivo documental.',
-    tag: 'Documento'
+    heightClass: 'h-64',
+    bgLight: 'bg-stone-100',
+    bgDark: 'dark:bg-stone-900',
+    title: 'Tecnologías',
+    description: 'Comparación (1970 / 1986 - 2026) en México.',
+    tag: 'Investigación'
   },
   {
     id: 2,
     img: '/imagenes/imagen_2.jpg',
-    title: 'Análisis sobre el impacto en sedes',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-    tag: 'Investigación'
+    heightClass: 'h-80',
+    bgLight: 'bg-slate-100',
+    bgDark: 'dark:bg-slate-900',
+    title: 'Expresión cultural',
+    description: 'Expresión cultural e identidad (memes, etc.).',
+    tag: 'Cultura'
   },
   {
     id: 3,
     img: '/imagenes/imagen_3.jpg',
-    title: 'Documento en espera de carga',
-    description: 'Este espacio está reservado para mostrar el contenido dinámico una vez que la integración con la base de datos y Google Drive esté lista.',
-    tag: 'Archivo'
+    heightClass: 'h-48',
+    bgLight: 'bg-gray-100',
+    bgDark: 'dark:bg-gray-900',
+    title: 'Discurso de odio',
+    description: 'Discurso de odio en Copas: Nacionalismo y prejuicios.',
+    tag: 'Sociedad'
   },
   {
     id: 4,
     img: '/imagenes/imagen_4.jpg',
-    title: 'Registro fotográfico del evento',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at erat in purus viverra dignissim.',
-    tag: 'Fotoperiodismo'
+    heightClass: 'h-72',
+    bgLight: 'bg-zinc-100',
+    bgDark: 'dark:bg-zinc-900',
+    title: 'Origen de los jugadores',
+    description: 'Nacionales vs. extranjeros.',
+    tag: 'Deporte'
   },
   {
     id: 5,
     img: '/imagenes/imagen_5.jpg',
-    title: 'Reporte de monitoreo digital',
-    description: 'Aquí se visualizará un extracto del informe técnico correspondiente a la sección de tecnologías de vigilancia.',
-    tag: 'Análisis'
+    heightClass: 'h-56',
+    bgLight: 'bg-neutral-100',
+    bgDark: 'dark:bg-neutral-900',
+    title: 'Fast Fashion',
+    description: 'Huella de carbono y Clima.',
+    tag: 'Medio Ambiente'
+  },
+  {
+    id: 6,
+    img: '/imagenes/imagen_6.jpg',
+    heightClass: 'h-80',
+    bgLight: 'bg-stone-100',
+    bgDark: 'dark:bg-stone-900',
+    title: 'Género / Feminismo',
+    description: 'Jugadoras y Violencia sexual.',
+    tag: 'Derechos'
+  },
+  {
+    id: 7,
+    img: '/imagenes/imagen_7.jpg',
+    heightClass: 'h-64',
+    bgLight: 'bg-slate-100',
+    bgDark: 'dark:bg-slate-900',
+    title: 'Desaparecidos',
+    description: 'Visibilización de desaparecidos en México (ejemplos en EE. UU. y Canadá).',
+    tag: 'Derechos Humanos'
+  },
+  {
+    id: 8,
+    img: '/imagenes/imagen_8.jpg',
+    heightClass: 'h-48',
+    bgLight: 'bg-gray-100',
+    bgDark: 'dark:bg-gray-900',
+    title: 'Álbum Panini',
+    description: 'El fenómeno del Álbum Panini.',
+    tag: 'Cultura Popular'
+  },
+  {
+    id: 9,
+    img: '/imagenes/imagen_9.jpg',
+    heightClass: 'h-72',
+    bgLight: 'bg-zinc-100',
+    bgDark: 'dark:bg-zinc-900',
+    title: 'Irán y guerras',
+    description: 'Irán y guerras globales.',
+    tag: 'Geopolítica'
+  },
+  {
+    id: 10,
+    img: '/imagenes/imagen_10.jpg',
+    heightClass: 'h-56',
+    bgLight: 'bg-neutral-100',
+    bgDark: 'dark:bg-neutral-900',
+    title: 'Apuestas deportivas',
+    description: 'Apuestas deportivas.',
+    tag: 'Economía'
+  },
+  {
+    id: 11,
+    img: '/imagenes/imagen_11.jpg',
+    heightClass: 'h-80',
+    bgLight: 'bg-stone-100',
+    bgDark: 'dark:bg-stone-900',
+    title: 'Desigualdad estructural',
+    description: 'Desigualdad estructural.',
+    tag: 'Sociedad'
+  },
+  {
+    id: 12,
+    img: '/imagenes/imagen_12.jpg',
+    heightClass: 'h-64',
+    bgLight: 'bg-slate-100',
+    bgDark: 'dark:bg-slate-900',
+    title: 'Monopolio',
+    description: 'Hipercomercialización y Merchandising.',
+    tag: 'Economía'
+  },
+  {
+    id: 13,
+    img: '/imagenes/imagen_13.jpg',
+    heightClass: 'h-48',
+    bgLight: 'bg-gray-100',
+    bgDark: 'dark:bg-gray-900',
+    title: 'Festejo',
+    description: 'Festejo y Destrozos.',
+    tag: 'Sociedad'
+  },
+  {
+    id: 14,
+    img: '/imagenes/imagen_14.jpg',
+    heightClass: 'h-72',
+    bgLight: 'bg-zinc-100',
+    bgDark: 'dark:bg-zinc-900',
+    title: 'Publicidad',
+    description: 'Publicidad (integrada).',
+    tag: 'Comunicación'
+  },
+  {
+    id: 15,
+    img: '/imagenes/imagen_15.jpg',
+    heightClass: 'h-56',
+    bgLight: 'bg-neutral-100',
+    bgDark: 'dark:bg-neutral-900',
+    title: 'Cobertura de medios',
+    description: 'Cobertura de los medios.',
+    tag: 'Medios'
   }
 ];
 
+const MethodologyPage = () => (
+  <div className="max-w-4xl mx-auto px-6 py-16 animate-fade-in">
+    <div className="mb-12 text-center">
+      <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-4 text-stone-900 dark:text-stone-100">
+        Metodología de Investigación
+      </h2>
+      <p className="text-stone-500 dark:text-stone-400 max-w-xl mx-auto text-lg">
+        Un enfoque documental interdisciplinario y crítico para analizar el megaevento desde los márgenes.
+      </p>
+      <div className="h-1 w-20 bg-rose-600 mt-6 rounded-full mx-auto"></div>
+    </div>
+
+    <div className="space-y-12 text-stone-700 dark:text-stone-300 leading-relaxed text-base md:text-lg">
+      <section className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-sm">
+        <h3 className="font-serif text-2xl font-semibold mb-4 text-emerald-700 dark:text-emerald-400">1. Archivo Documental Físico y Digital</h3>
+        <p className="mb-4">
+          Nuestra base metodológica reposa en el rastreo y curaduría de documentos oficiales, licitaciones de infraestructura, contratos de publicidad estatal y registros de prensa local. A través de este archivo digitalizado, pretendemos confrontar las promesas oficiales de desarrollo con la distribución real de los presupuestos y la transformación del espacio urbano.
+        </p>
+      </section>
+
+      <section className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-sm">
+        <h3 className="font-serif text-2xl font-semibold mb-4 text-emerald-700 dark:text-emerald-400">2. Perspectiva de Género e Interseccionalidad</h3>
+        <p className="mb-4">
+          Investigamos la precarización laboral y la violencia sistemática en el contexto del turismo masivo. Por medio de entrevistas con colectivas y organizaciones en los alrededores de los estadios, documentamos el incremento de la especulación inmobiliaria y sus consecuencias en las trabajadoras informales y residentes locales.
+        </p>
+      </section>
+
+      <section className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-sm">
+        <h3 className="font-serif text-2xl font-semibold mb-4 text-emerald-700 dark:text-emerald-400">3. Análisis de Discurso en Entornos Digitales</h3>
+        <p className="mb-4">
+          Con herramientas de análisis semántico y recolección de datos públicos, analizamos la polarización y la proliferación de discursos xenófobos y nacionalistas en plataformas digitales durante el periodo de preparación y ejecución de la Copa del Mundo.
+        </p>
+      </section>
+
+      <section className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-sm">
+        <h3 className="font-serif text-2xl font-semibold mb-4 text-emerald-700 dark:text-emerald-400">4. Mapeo Satelital y Catastro Crítico</h3>
+        <p className="mb-4">
+          Colaboramos con urbanistas para trazar de forma geoespacial los procesos de gentrificación y desplazamiento forzado a lo largo de las zonas circundantes a los estadios Azteca (CDMX), BBVA (Monterrey) y Akron (Guadalajara).
+        </p>
+      </section>
+    </div>
+  </div>
+);
+
+const AboutPage = () => (
+  <div className="max-w-4xl mx-auto px-6 py-16 animate-fade-in">
+    <div className="mb-12 text-center">
+      <h2 className="font-serif text-4xl md:text-5xl font-semibold mb-4 text-stone-900 dark:text-stone-100">
+        Acerca del Proyecto
+      </h2>
+      <p className="text-stone-500 dark:text-stone-400 max-w-xl mx-auto text-lg">
+        Memoria del Mundial 2026: Una iniciativa colectiva para registrar las realidades alternas al megaevento.
+      </p>
+      <div className="h-1 w-20 bg-rose-600 mt-6 rounded-full mx-auto"></div>
+    </div>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-stone-700 dark:text-stone-300">
+      <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-sm">
+        <h3 className="font-serif text-2xl font-semibold mb-4 text-stone-900 dark:text-stone-100">¿Qué es este Archivo?</h3>
+        <p className="leading-relaxed">
+          <strong>Memoria Mundial 2026</strong> es un archivo digital independiente, transdisciplinario y de libre acceso. Nace con el propósito de contraponer una memoria histórica crítica frente a los discursos institucionales hipercomerciales que acompañan a la Copa Mundial de la FIFA en México, Estados Unidos y Canadá.
+        </p>
+      </div>
+
+      <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-sm">
+        <h3 className="font-serif text-2xl font-semibold mb-4 text-stone-900 dark:text-stone-100">Nuestra Misión</h3>
+        <p className="leading-relaxed">
+          Buscamos visibilizar las problemáticas urbanas, laborales y de derechos humanos que los megaeventos deportivos suelen ocultar bajo una narrativa triunfalista. Mediante la recopilación de datos, ensayos y fotoperiodismo de campo, construimos una memoria viva de los impactos reales en las comunidades locales.
+        </p>
+      </div>
+
+      <div className="md:col-span-2 bg-stone-100 dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-3xl p-8 shadow-sm flex flex-col md:flex-row gap-8 items-center">
+        <div className="md:w-2/3">
+          <h3 className="font-serif text-2xl font-semibold mb-4 text-stone-900 dark:text-stone-100">Participación Ciudadana</h3>
+          <p className="leading-relaxed mb-4">
+            Este es un proyecto abierto. Académicos, activistas, periodistas y ciudadanos interesados en aportar testimonios, fotografías o documentos sobre las transformaciones en sus comunidades son bienvenidos a colaborar con nuestro equipo de investigación.
+          </p>
+          <button className="bg-emerald-700 hover:bg-emerald-600 text-white font-medium px-6 py-2.5 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500">
+            Contactar al Equipo
+          </button>
+        </div>
+        <div className="md:w-1/3 flex justify-center">
+          <img src="/imagenes/Logo_memoria_mundial.png" className="h-32 w-auto opacity-80 dark:opacity-60" alt="Logo de fondo" />
+        </div>
+      </div>
+    </div>
+  </div>
+);
+
 export default function App() {
   const [isDark, setIsDark] = useState(true);
+  const [activeTab, setActiveTab] = useState('inicio');
+  const [selectedFilter, setSelectedFilter] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [suggestions, setSuggestions] = useState([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [activeSuggestionIndex, setActiveSuggestionIndex] = useState(-1);
+  
+  const searchContainerRef = useRef(null);
 
   useEffect(() => {
     const saved = localStorage.getItem('theme');
@@ -96,28 +274,150 @@ export default function App() {
     }
   }, []);
 
+  // Update suggestions dynamically as user types
+  useEffect(() => {
+    const query = searchQuery.trim().toLowerCase();
+    if (query === '') {
+      setSuggestions([]);
+      setShowSuggestions(false);
+      return;
+    }
+
+    const filtered = FILTER_THEMES.filter(theme => 
+      theme.toLowerCase().includes(query)
+    );
+    setSuggestions(filtered);
+    setShowSuggestions(true);
+    setActiveSuggestionIndex(-1);
+  }, [searchQuery]);
+
+  // Click outside listener for autocomplete suggestions dropdown
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (searchContainerRef.current && !searchContainerRef.current.contains(e.target)) {
+        setShowSuggestions(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
   const toggleTheme = () => {
     const newValue = !isDark;
     setIsDark(newValue);
     localStorage.setItem('theme', newValue ? 'dark' : 'light');
   };
 
+  const handleSelectSuggestion = (suggestion) => {
+    setSearchQuery(suggestion);
+    setSelectedFilter(suggestion);
+    setShowSuggestions(false);
+  };
+
+  const handleKeyDown = (e) => {
+    if (!showSuggestions || suggestions.length === 0) return;
+
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      setActiveSuggestionIndex((prev) => (prev + 1) % suggestions.length);
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      setActiveSuggestionIndex((prev) => (prev - 1 + suggestions.length) % suggestions.length);
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      if (activeSuggestionIndex >= 0 && activeSuggestionIndex < suggestions.length) {
+        handleSelectSuggestion(suggestions[activeSuggestionIndex]);
+      } else {
+        setShowSuggestions(false);
+      }
+    } else if (e.key === 'Escape') {
+      setShowSuggestions(false);
+    }
+  };
+
+  // Filter items based on selectedFilter (category) and searchQuery (typed query)
+  const filteredItems = ARCHIVE_ITEMS.filter((item) => {
+    const matchesFilter = selectedFilter ? item.title === selectedFilter : true;
+    const matchesSearch = searchQuery.trim() !== '' 
+      ? (item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+         item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+         item.tag.toLowerCase().includes(searchQuery.toLowerCase()))
+      : true;
+    return matchesFilter && matchesSearch;
+  });
+
+  const scrollToArchivo = () => {
+    setActiveTab('inicio');
+    setTimeout(() => {
+      const element = document.getElementById('archivo-section');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
   return (
     <div className={`${isDark ? 'dark' : ''}`}>
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(8px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fadeIn 0.4s ease-out forwards;
+        }
+      `}</style>
       <div className="min-h-screen flex flex-col bg-stone-50 dark:bg-stone-950 text-stone-800 dark:text-stone-200 transition-colors duration-300 selection:bg-emerald-200 dark:selection:bg-emerald-900/50">
         
         {/* Navbar */}
         <nav className="border-b border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-stone-950/80 backdrop-blur-md sticky top-0 z-50 transition-colors duration-300">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div className="font-serif text-xl font-semibold tracking-wide">
-              Memoria Mundial
-            </div>
+            {/* Logo Clickeable */}
+            <a 
+              href="/" 
+              onClick={(e) => {
+                e.preventDefault();
+                setActiveTab('inicio');
+                setSearchQuery('');
+                setSelectedFilter(null);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
+              className="flex flex-shrink-0 items-center gap-3 transition-transform hover:scale-105"
+            >
+              <img src="/imagenes/Logo_memoria_mundial.png" className="h-16 w-auto" alt="Memoria Mundial Logo" />
+              <span className="font-serif text-sm font-medium tracking-wider text-stone-600 dark:text-stone-400">Memoria del Mundial</span>
+            </a>
+            
             <div className="hidden md:flex gap-8 text-sm font-medium">
-              <a href="#" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">Inicio</a>
-              <a href="#" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">Archivo</a>
-              <a href="#" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">Metodología</a>
-              <a href="#" className="hover:text-emerald-700 dark:hover:text-emerald-400 transition-colors">Acerca de</a>
+              <button 
+                onClick={() => {
+                  setActiveTab('inicio');
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }} 
+                className={`transition-colors focus:outline-none ${activeTab === 'inicio' ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'hover:text-emerald-700 dark:hover:text-emerald-400 text-stone-600 dark:text-stone-300'}`}
+              >
+                Inicio
+              </button>
+              <button 
+                onClick={scrollToArchivo} 
+                className="hover:text-emerald-700 dark:hover:text-emerald-400 text-stone-600 dark:text-stone-300 transition-colors focus:outline-none"
+              >
+                Archivo
+              </button>
+              <button 
+                onClick={() => setActiveTab('metodologia')} 
+                className={`transition-colors focus:outline-none ${activeTab === 'metodologia' ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'hover:text-emerald-700 dark:hover:text-emerald-400 text-stone-600 dark:text-stone-300'}`}
+              >
+                Metodología
+              </button>
+              <button 
+                onClick={() => setActiveTab('acerca')} 
+                className={`transition-colors focus:outline-none ${activeTab === 'acerca' ? 'text-emerald-600 dark:text-emerald-400 font-semibold' : 'hover:text-emerald-700 dark:hover:text-emerald-400 text-stone-600 dark:text-stone-300'}`}
+              >
+                Acerca de
+              </button>
             </div>
+            
             <button 
               onClick={toggleTheme} 
               className="p-2 rounded-full bg-stone-200 dark:bg-stone-800 hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors focus:outline-none focus:ring-2 focus:ring-emerald-500"
@@ -129,99 +429,173 @@ export default function App() {
         </nav>
 
         <main className="flex-grow">
-          {/* Hero Banner Full-Width */}
-          <section className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center">
-            {/* Imagen de fondo local */}
-            <div 
-              className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
-              style={{ backgroundImage: "url('/imagenes/hero-banner.jpg')", backgroundPosition: "center 10%" }}
-            />
-            {/* Overlay oscuro */}
-            <div className="absolute inset-0 bg-black/60 bg-gradient-to-t from-stone-950/80 to-transparent" />
-            
-            {/* Contenido centrado */}
-            <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
-              <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 tracking-wide drop-shadow-lg">
-                Memoria del Mundial
-              </h1>
-              <p className="text-lg md:text-xl text-stone-200 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
-                Un archivo documental interdisciplinario con enfoque crítico sobre el impacto sociopolítico y cultural en México 2026.
-              </p>
-              <button className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-stone-900">
-                Explorar el Archivo <ArrowRight className="w-5 h-5" />
-              </button>
-            </div>
-          </section>
-
-          {/* Archivo Visual (Masonry) */}
-          <section className="max-w-7xl mx-auto px-6 py-20">
-            <div className="mb-12 text-center md:text-left">
-              <h2 className="font-serif text-3xl font-semibold">Últimas Investigaciones</h2>
-              <div className="h-1 w-20 bg-rose-600 mt-4 rounded-full mx-auto md:mx-0"></div>
-            </div>
-
-            {/* Masonry Layout */}
-            <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-              {ARCHIVE_ITEMS.map((item) => (
+          {activeTab === 'inicio' && (
+            <div className="animate-fade-in">
+              {/* Hero Banner Full-Width con Fondo Nítido y Texto Tricolor */}
+              <section className="relative w-full h-[60vh] min-h-[500px] flex items-center justify-center">
+                {/* Imagen de fondo local sin blur */}
                 <div 
-                  key={item.id} 
-                  className="break-inside-avoid relative group rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 bg-white dark:bg-stone-900 shadow-sm hover:shadow-xl transition-all duration-300"
-                >
-                  <div className="overflow-hidden bg-stone-100 dark:bg-stone-950 flex items-center justify-center">
-                    <img 
-                      src={item.img} 
-                      alt={item.title} 
-                      className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="p-5">
-                    <span className="text-[10px] uppercase tracking-wider font-semibold text-rose-600 dark:text-rose-400 mb-2 block transition-colors duration-300">
-                      {item.tag}
-                    </span>
-                    <h3 className="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 leading-tight mb-2 transition-colors duration-300">
-                      {item.title}
-                    </h3>
-                    <p className="text-sm text-stone-600 dark:text-stone-400 line-clamp-3 leading-relaxed transition-colors duration-300">
-                      {item.description}
-                    </p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </section>
-
-          {/* Grid de Ejes de Investigación */}
-          <section className="max-w-7xl mx-auto px-6 py-12 pb-24">
-            <div className="mb-12 text-center md:text-left">
-              <h2 className="font-serif text-3xl font-semibold">Ejes de Investigación</h2>
-              <div className="h-1 w-20 bg-emerald-600 mt-4 rounded-full mx-auto md:mx-0"></div>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {THEMES.map((theme, index) => (
-                <div 
-                  key={index} 
-                  className="group bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 hover:border-emerald-200 dark:hover:border-stone-700 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-stone-200 dark:hover:shadow-black/20 cursor-pointer flex flex-col"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="p-3 bg-stone-50 dark:bg-stone-950 rounded-xl border border-stone-100 dark:border-stone-800 group-hover:scale-110 transition-transform">
-                      {theme.icon}
-                    </div>
-                    <span className={`text-xs px-3 py-1 rounded-full font-medium transition-colors duration-300 ${theme.badgeColor}`}>
-                      {theme.badge}
-                    </span>
-                  </div>
-                  <h3 className="font-serif text-xl font-medium mb-3 text-stone-900 dark:text-stone-100 transition-colors duration-300">
-                    {theme.title}
-                  </h3>
-                  <p className="text-stone-600 dark:text-stone-400 text-sm leading-relaxed flex-grow transition-colors duration-300">
-                    {theme.description}
+                  className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat"
+                  style={{ backgroundImage: "url('/imagenes/hero-banner.jpg')", backgroundPosition: "center 10%" }}
+                />
+                {/* Overlay oscuro ligero para máxima nitidez */}
+                <div className="absolute inset-0 bg-black/30" />
+                
+                {/* Contenido centrado */}
+                <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+                  <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6 tracking-wide drop-shadow-lg">
+                    <span className="text-green-600">Memoria</span>{' '}
+                    <span className="text-white">del</span>{' '}
+                    <span className="text-red-600">Mundial</span>
+                  </h1>
+                  <p className="text-lg md:text-xl text-stone-100 mb-10 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+                    Un archivo documental interdisciplinario con enfoque crítico sobre el impacto sociopolítico y cultural en México 2026.
                   </p>
+                  <button 
+                    onClick={scrollToArchivo}
+                    className="inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-600 text-white px-8 py-3 rounded-full font-medium transition-all shadow-lg hover:shadow-2xl hover:scale-105 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 focus:ring-offset-stone-900"
+                  >
+                    Explorar el Archivo <ArrowRight className="w-5 h-5" />
+                  </button>
                 </div>
-              ))}
+              </section>
+
+              {/* Buscador y Barra de Filtros */}
+              <section id="archivo-section" className="max-w-7xl mx-auto px-6 pt-10 pb-4 scroll-mt-24">
+                <div className="flex flex-col gap-6">
+                  {/* Buscador */}
+                  <div ref={searchContainerRef} className="relative max-w-2xl mx-auto w-full">
+                    <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                      <Search className="h-5 w-5 text-stone-400" />
+                    </div>
+                    <input 
+                      type="text" 
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      onFocus={() => { if (searchQuery) setShowSuggestions(true); }}
+                      className="block w-full pl-11 pr-16 py-3.5 border border-stone-200 dark:border-stone-700 rounded-full bg-white dark:bg-stone-900 text-stone-900 dark:text-stone-100 placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors shadow-sm"
+                      placeholder="Buscar investigaciones, documentos, autores..." 
+                    />
+                    
+                    {/* Clear search button */}
+                    {searchQuery && (
+                      <button 
+                        onClick={() => { setSearchQuery(''); setSelectedFilter(null); }}
+                        className="absolute inset-y-0 right-0 pr-4 flex items-center text-stone-400 hover:text-stone-600 dark:hover:text-stone-200"
+                        aria-label="Limpiar búsqueda"
+                      >
+                        <X className="w-5 h-5" />
+                      </button>
+                    )}
+
+                    {/* Autocomplete Dropdown Suggestions */}
+                    {showSuggestions && suggestions.length > 0 && (
+                      <ul className="absolute z-50 left-0 right-0 mt-2 bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-2xl shadow-xl max-h-60 overflow-y-auto divide-y divide-stone-100 dark:divide-stone-800 focus:outline-none">
+                        {suggestions.map((suggestion, idx) => (
+                          <li 
+                            key={idx}
+                            onClick={() => handleSelectSuggestion(suggestion)}
+                            className={`px-5 py-3 cursor-pointer text-sm transition-colors ${
+                              idx === activeSuggestionIndex 
+                                ? 'bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-medium' 
+                                : 'text-stone-700 dark:text-stone-300 hover:bg-stone-50 dark:hover:bg-stone-800/50'
+                            }`}
+                          >
+                            {suggestion}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Filtros Horizontales (Píldoras) */}
+                  <div className="flex overflow-x-auto whitespace-nowrap gap-3 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                    <button
+                      onClick={() => { setSelectedFilter(null); setSearchQuery(''); }}
+                      className={`px-5 py-2 rounded-full border text-sm font-medium transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 hover:-translate-y-0.5 ${
+                        !selectedFilter 
+                          ? 'border-emerald-600 bg-emerald-600 text-white dark:bg-emerald-700 dark:border-emerald-700' 
+                          : 'border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                      }`}
+                    >
+                      Todos
+                    </button>
+                    {FILTER_THEMES.map((filter, index) => {
+                      const isActive = selectedFilter === filter;
+                      return (
+                        <button 
+                          key={index}
+                          onClick={() => {
+                            if (isActive) {
+                              setSelectedFilter(null);
+                            } else {
+                              setSelectedFilter(filter);
+                              setSearchQuery(''); 
+                            }
+                          }}
+                          className={`px-5 py-2 rounded-full border text-sm font-medium transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 hover:-translate-y-0.5 ${
+                            isActive
+                              ? 'border-emerald-600 bg-emerald-600 text-white dark:bg-emerald-700 dark:border-emerald-700'
+                              : 'border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                          }`}
+                        >
+                          {filter}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+
+              {/* Grid Asimétrico (Mosaico de 15 Tarjetas) */}
+              <section className="max-w-7xl mx-auto px-6 py-10 pb-24">
+                {filteredItems.length === 0 ? (
+                  <div className="text-center py-20 bg-stone-100/50 dark:bg-stone-900/30 rounded-3xl border border-dashed border-stone-200 dark:border-stone-800">
+                    <p className="text-stone-500 dark:text-stone-400 text-lg">No se encontraron investigaciones para tu búsqueda o filtro.</p>
+                    <button 
+                      onClick={() => { setSelectedFilter(null); setSearchQuery(''); }}
+                      className="mt-4 text-emerald-600 dark:text-emerald-400 font-semibold hover:underline"
+                    >
+                      Restablecer filtros
+                    </button>
+                  </div>
+                ) : (
+                  <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+                    {filteredItems.map((item) => (
+                      <div 
+                        key={item.id} 
+                        className={`break-inside-avoid relative group rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 ${item.bgLight} ${item.bgDark} shadow-sm hover:shadow-xl transition-all duration-300`}
+                      >
+                        <div className={`overflow-hidden flex items-center justify-center w-full ${item.heightClass}`}>
+                          <img 
+                            src={item.img} 
+                            alt={item.title} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                            loading="lazy"
+                          />
+                        </div>
+                        <div className="p-5">
+                          <span className="text-[10px] uppercase tracking-wider font-semibold text-rose-600 dark:text-rose-400 mb-2 block transition-colors duration-300">
+                            {item.tag}
+                          </span>
+                          <h3 className="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 leading-tight mb-2 transition-colors duration-300">
+                            {item.title}
+                          </h3>
+                          <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed transition-colors duration-300">
+                            {item.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </section>
             </div>
-          </section>
+          )}
+
+          {activeTab === 'metodologia' && <MethodologyPage />}
+          {activeTab === 'acerca' && <AboutPage />}
         </main>
 
         {/* Footer */}

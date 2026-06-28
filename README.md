@@ -20,6 +20,12 @@ El proyecto está dividido en dos aplicaciones principales para una clara separa
 La interfaz visual de cara al usuario final, diseñada bajo un sistema sobrio, editorial y elegante, respetando paletas de colores accesibles tanto en modos claro como oscuro.
 - **Tecnologías:** React 19, Vite (v8), Tailwind CSS (v4), Lucide React.
 - **Ejecución:** `cd frontend && npm run dev` (Requiere Node.js 22+)
+- **Características de la Interfaz:**
+  - **Diseño Editorial y Responsivo:** Estética cuidada tipo reportaje de prensa con modo claro y oscuro persistido localmente.
+  - **Buscador Reactivo con Autocompletado:** Autocompletado de temas en tiempo real, menú de sugerencias con soporte completo de navegación por teclado (`ArrowUp`/`ArrowDown`/`Enter`/`Escape`).
+  - **Filtros Dinámicos:** Barra deslizable táctil de píldoras con los 15 temas de investigación del archivo.
+  - **Mosaico Asimétrico (Masonry):** Cuadrícula asimétrica nativa adaptada al tamaño real de las imágenes.
+  - **Navegación Fluida:** Cambio de sección animado (`fade-in`) para Inicio, Archivo, Metodología y Acerca de sin recargas de página.
 
 ### 2. Backend (`/backend`)
 El motor de la aplicación encargado de procesar la lógica de negocio y conectarse como puente al sistema de archivos documentales (Google Drive).
