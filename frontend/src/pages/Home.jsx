@@ -1,50 +1,45 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Search, ArrowRight, Sun, Moon, X } from 'lucide-react';
+import { Search, ArrowRight, Sun, Moon, X, Loader2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { temas } from '../data';
 
-const FILTER_THEMES = [
-  'Tecnologías', 'Expresión cultural', 'Discurso de odio', 'Origen de los jugadores', 
-  'Fast Fashion', 'Género / Feminismo', 'Desaparecidos', 'Álbum Panini', 
-  'Irán y guerras', 'Apuestas deportivas', 'Desigualdad estructural', 
-  'Monopolio', 'Festejo', 'Publicidad', 'Cobertura de medios'
-];
 
-const themeDetails = {
-  1: { tag: 'Investigación', descripcion: 'Comparación (1970 / 1986 - 2026) en México.' },
-  2: { tag: 'Cultura', descripcion: 'Expresión cultural e identidad (memes, etc.).' },
-  3: { tag: 'Sociedad', descripcion: 'Discurso de odio en Copas: Nacionalismo y prejuicios.' },
-  4: { tag: 'Deporte', descripcion: 'Nacionales vs. extranjeros.' },
-  5: { tag: 'Medio Ambiente', descripcion: 'Huella de carbono y Clima.' },
-  6: { tag: 'Derechos', descripcion: 'Jugadoras y Violencia sexual.' },
-  7: { tag: 'Derechos Humanos', descripcion: 'Visibilización de desaparecidos en México (ejemplos en EE. UU. y Canadá).' },
-  8: { tag: 'Cultura Popular', descripcion: 'El fenómeno del Álbum Panini.' },
-  9: { tag: 'Geopolítica', descripcion: 'Irán y guerras globales.' },
-  10: { tag: 'Economía', descripcion: 'Apuestas deportivas.' },
-  11: { tag: 'Sociedad', descripcion: 'Desigualdad estructural.' },
-  12: { tag: 'Economía', descripcion: 'Hipercomercialización y Merchandising.' },
-  13: { tag: 'Sociedad', descripcion: 'Festejo y Destrozos.' },
-  14: { tag: 'Comunicación', descripcion: 'Publicidad (integrada).' },
-  15: { tag: 'Medios', descripcion: 'Cobertura de los medios.' }
-};
 
 const heights = ['h-64', 'h-80', 'h-96'];
 const bgLights = ['bg-stone-100', 'bg-slate-100', 'bg-gray-100', 'bg-zinc-100', 'bg-neutral-100'];
 const bgDarks = ['dark:bg-stone-900', 'dark:bg-slate-900', 'dark:bg-gray-900', 'dark:bg-zinc-900', 'dark:bg-neutral-900'];
 
-const archiveItems = temas.map((t) => {
-  const details = themeDetails[t.id] || { tag: 'Archivo', descripcion: '' };
-  return {
-    id: t.id,
-    img: t.imagen,
-    title: t.titulo,
-    description: details.descripcion,
-    tag: details.tag,
-    heightClass: heights[t.id % heights.length],
-    bgLight: bgLights[t.id % bgLights.length],
-    bgDark: bgDarks[t.id % bgDarks.length]
-  };
-});
+const themeColors = [
+  'text-rose-600 dark:text-rose-400',
+  'text-indigo-600 dark:text-indigo-400',
+  'text-sky-600 dark:text-sky-400',
+  'text-amber-600 dark:text-amber-400',
+  'text-emerald-600 dark:text-emerald-400',
+  'text-violet-600 dark:text-violet-400',
+  'text-fuchsia-600 dark:text-fuchsia-400',
+  'text-orange-600 dark:text-orange-400'
+];
+
+const getThemeColor = (tag) => {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return themeColors[Math.abs(hash) % themeColors.length];
+};
+
+const formatTitle = (title) => {
+  if (!title) return 'Sin título';
+  const smallWords = ['de', 'en', 'el', 'la', 'los', 'las', 'y', 'del', 'al', 'un', 'una', 'unos', 'unas', 'sobre', 'con', 'por', 'para', 'vs'];
+  return title.toLowerCase().split(' ').map((word, i) => {
+    if (i !== 0 && smallWords.includes(word)) return word;
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }).join(' ');
+};
+
+const simplifyTheme = (rawTheme) => {
+  if (!rawTheme) return 'Otro';
+  return rawTheme.split('->')[0].split('-')[0].trim();
+};
 
 const MethodologyPage = () => (
   <div className="max-w-4xl mx-auto px-6 py-16 animate-fade-in">
@@ -136,6 +131,8 @@ const AboutPage = () => (
 );
 
 export default function Home({ isDark, toggleTheme }) {
+  const [archiveItems, setArchiveItems] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [activeTab, setActiveTab] = useState('inicio');
   const [selectedFilter, setSelectedFilter] = useState(null);
   const [searchQuery, setSearchQuery] = useState('');
@@ -147,6 +144,45 @@ export default function Home({ isDark, toggleTheme }) {
   const searchContainerRef = useRef(null);
 
   useEffect(() => {
+    const fetchInvestigaciones = async () => {
+      try {
+        const response = await fetch('http://localhost:5000/api/investigaciones');
+        const data = await response.json();
+        
+        const formattedItems = data
+          .filter(t => !t.autor.toLowerCase().includes('rovelo'))
+          .map((t, index) => {
+            const simpleTheme = simplifyTheme(t.tema);
+            return {
+              id: t.id,
+              img: t.portada 
+                ? (t.portada.startsWith('/imagenes') ? t.portada : `http://localhost:5000/api/image/${t.portada}`)
+                : '/imagenes/no-portada.webp',
+              title: formatTitle(t.titulo),
+              description: `Autor: ${formatTitle(t.autor)}`,
+              tag: simpleTheme,
+              colorClass: getThemeColor(simpleTheme),
+              heightClass: heights[index % heights.length],
+              bgLight: bgLights[index % bgLights.length],
+              bgDark: bgDarks[index % bgDarks.length],
+              isFallback: !t.portada
+            };
+          });
+        
+        setArchiveItems(formattedItems);
+      } catch (error) {
+        console.error("Error cargando investigaciones:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchInvestigaciones();
+  }, []);
+
+  const dynamicThemes = Array.from(new Set(archiveItems.map(item => item.tag))).filter(Boolean).sort();
+
+  useEffect(() => {
     const query = searchQuery.trim().toLowerCase();
     if (query === '') {
       setSuggestions([]);
@@ -154,13 +190,18 @@ export default function Home({ isDark, toggleTheme }) {
       return;
     }
 
-    const filtered = FILTER_THEMES.filter(theme => 
+    const matchedThemes = dynamicThemes.filter(theme => 
       theme.toLowerCase().includes(query)
     );
-    setSuggestions(filtered);
+    const matchedTitles = archiveItems
+      .filter(item => item.title.toLowerCase().includes(query))
+      .map(item => item.title);
+      
+    const combined = Array.from(new Set([...matchedThemes, ...matchedTitles])).slice(0, 8);
+    setSuggestions(combined);
     setShowSuggestions(true);
     setActiveSuggestionIndex(-1);
-  }, [searchQuery]);
+  }, [searchQuery, archiveItems]);
 
   useEffect(() => {
     const handleOutsideClick = (e) => {
@@ -174,7 +215,11 @@ export default function Home({ isDark, toggleTheme }) {
 
   const handleSelectSuggestion = (suggestion) => {
     setSearchQuery(suggestion);
-    setSelectedFilter(suggestion);
+    if (dynamicThemes.includes(suggestion)) {
+      setSelectedFilter(suggestion);
+    } else {
+      setSelectedFilter(null);
+    }
     setShowSuggestions(false);
   };
 
@@ -200,7 +245,7 @@ export default function Home({ isDark, toggleTheme }) {
   };
 
   const filteredItems = archiveItems.filter((item) => {
-    const matchesFilter = selectedFilter ? item.title === selectedFilter : true;
+    const matchesFilter = selectedFilter ? item.tag === selectedFilter : true;
     const matchesSearch = searchQuery.trim() !== '' 
       ? (item.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
          item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -361,7 +406,7 @@ export default function Home({ isDark, toggleTheme }) {
                     )}
                   </div>
 
-                  <div className="flex overflow-x-auto whitespace-nowrap gap-3 pb-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                  <div className="flex flex-wrap justify-center gap-3 pb-4">
                     <button
                       onClick={() => { setSelectedFilter(null); setSearchQuery(''); }}
                       className={`px-5 py-2 rounded-full border text-sm font-medium transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 hover:-translate-y-0.5 ${
@@ -372,7 +417,7 @@ export default function Home({ isDark, toggleTheme }) {
                     >
                       Todos
                     </button>
-                    {FILTER_THEMES.map((filter, index) => {
+                    {dynamicThemes.map((filter, index) => {
                       const isActive = selectedFilter === filter;
                       return (
                         <button 
@@ -400,7 +445,12 @@ export default function Home({ isDark, toggleTheme }) {
               </section>
 
               <section className="max-w-7xl mx-auto px-6 py-10 pb-24">
-                {filteredItems.length === 0 ? (
+                {loading ? (
+                  <div className="flex flex-col items-center justify-center py-20 text-stone-500">
+                    <Loader2 className="w-8 h-8 animate-spin mb-4" />
+                    <p>Cargando investigaciones desde Google Drive...</p>
+                  </div>
+                ) : filteredItems.length === 0 ? (
                   <div className="text-center py-20 bg-stone-100/50 dark:bg-stone-900/30 rounded-3xl border border-dashed border-stone-200 dark:border-stone-800">
                     <p className="text-stone-500 dark:text-stone-400 text-lg">No se encontraron investigaciones para tu búsqueda o filtro.</p>
                     <button 
@@ -414,21 +464,25 @@ export default function Home({ isDark, toggleTheme }) {
                   <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
                     {filteredItems.map((item) => (
                       <Link 
-                        to={`/investigacion/${encodeURIComponent(item.title)}`}
+                        to={`/investigacion/${item.id}`}
                         key={item.id} 
                         className={`block break-inside-avoid relative group rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 ${item.bgLight} ${item.bgDark} shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer`}
                       >
-                        <div className={`overflow-hidden flex items-center justify-center w-full ${item.heightClass}`}>
+                        <div className={`overflow-hidden flex items-center justify-center w-full ${item.heightClass} ${item.isFallback ? 'bg-stone-200 dark:bg-stone-800 p-8' : ''}`}>
                           <img 
                             src={item.img} 
                             alt={item.title} 
-                            className={`w-full h-full object-cover group-hover:scale-105 transition-all duration-700 ease-in-out ${loadedImages[item.id] ? 'opacity-100 blur-none' : 'opacity-0 blur-md scale-110'}`}
+                            className={`w-full h-full ${item.isFallback ? 'object-contain opacity-40 mix-blend-multiply dark:mix-blend-screen' : 'object-cover'} group-hover:scale-105 transition-all duration-700 ease-in-out ${loadedImages[item.id] ? 'opacity-100 blur-none' : 'opacity-0 blur-md scale-110'}`}
                             loading="lazy"
                             onLoad={() => setLoadedImages(prev => ({ ...prev, [item.id]: true }))}
+                            onError={(e) => { 
+                              e.target.src = '/imagenes/logo.webp';
+                              e.target.className = 'w-full h-full object-contain opacity-40 mix-blend-multiply dark:mix-blend-screen group-hover:scale-105 transition-all duration-700 ease-in-out';
+                            }}
                           />
                         </div>
                         <div className="p-5">
-                          <span className="text-[10px] uppercase tracking-wider font-semibold text-rose-600 dark:text-rose-400 mb-2 block transition-colors duration-300">
+                          <span className={`text-[10px] uppercase tracking-wider font-semibold mb-2 block transition-colors duration-300 ${item.colorClass}`}>
                             {item.tag}
                           </span>
                           <h3 className="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 leading-tight mb-2 transition-colors duration-300">

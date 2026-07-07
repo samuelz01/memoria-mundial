@@ -1,0 +1,215 @@
+[
+  {
+    "correo": "perlavaleriagmurrieta@gmail.com",
+    "quitar": ["Por: Valeria Garcia"],
+    "media": [
+      { "tag": "(FOTO 1)", "url": "https://drive.google.com/file/d/1ogv6NBWMlpv1lQcvHBH_hgBs3lpRpRiV/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 2)", "url": "https://drive.google.com/file/d/1P7CZAzcLdagCY7SnNe2QgkCc_wx-qv4Q/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 3)", "url": "https://drive.google.com/file/d/1k8fcUmNnes64czoYSaHq1_mqgZsfeXvH/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 4)", "url": "https://drive.google.com/file/d/1QQF8NvfbzwjeJaIeAzgSVNNE591dfLcB/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 5)", "url": "https://drive.google.com/file/d/10cuYR9hB9y2UvlAX6-ehug90w3dCpOy0/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 6)", "url": "https://drive.google.com/file/d/1QjFc_aRMrDSoPuMSmHz-eC8Dv9XWd-bX/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 7)", "url": "https://drive.google.com/file/d/1EHanJosG9ls68CHuK3r52yrCty7GJW8h/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 8)", "url": "https://drive.google.com/file/d/1YoRWNWJ9pPMHg4KaN36PbpXqzGkzkNW0/view?usp=drive_link", "type": "image" },
+      { "tag": "(FOTO 9)", "url": "https://drive.google.com/file/d/1ogTi8L8odxNGvSMnp1EkhQjlWWHbIq1m/view?usp=drive_link", "type": "image" }
+    ]
+  },
+  {
+    "correo": "david.rojas@cua.uam.mx",
+    "quitar": [],
+    "media": [
+      { "tag": "[Imagen_1]", "url": "https://drive.google.com/file/d/1bugYrOnSVHOxJqNhD9QTKYAb3WjYGx4f/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen_2]", "url": "https://drive.google.com/file/d/1qC_yWSQ3b5PmR7fukDgv0x3lvZlQAtLy/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen_3]", "url": "https://drive.google.com/file/d/1B75J7yDpLR0TFcAJvQ2dLhMQKjwE0tt5/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen_4]", "url": "https://drive.google.com/file/d/1E0XV0wI0NVsp41UHeaWVCZQiOwY8M0k0/view?usp=drive_link", "type": "image" }
+    ]
+  },
+  {
+    "correo": "ana.sofia.gutierrez@cua.uam.mx",
+    "quitar": ["Ana Sofía Gutiérrez Cortés"],
+    "media": [
+      { "tag": "(imagen 1)", "url": "https://drive.google.com/file/d/1ueHVdaZqUoBXnxEN-AgyIpbSfCuA8OEy/view?usp=drive_link", "type": "image", "source": "Fuente: Intervención en publicidad oficial de la CDMX." },
+      { "tag": "(video1)", "url": "https://drive.google.com/file/d/1ykIzZpNddVP0ykrJWlsTr0OTPVlaU_u4/view?usp=drive_link", "type": "video", "source": "Fuente: Cortesía de Pexels" },
+      { "tag": "(imagen 2)", "url": "https://drive.google.com/file/d/1We6ooqff8kPtdnYDba93naAn2KS4ei00/view?usp=drive_link", "type": "image", "source": "Fuente: Elementos policiales reprimiendo manifestaciones feministas en la CDMX mediante el uso de gas y equipo antimotines." },
+      { "tag": "(imagen 3)", "url": "https://drive.google.com/file/d/1E26D2_RrGnni1v_9zCg5eBHfpPYvqt31/view?usp=drive_link", "type": "image", "source": "Fuente: Elementos policiales reprimiendo manifestaciones feministas en la CDMX mediante el uso de gas y equipo antimotines." },
+      { "tag": "(video2)", "url": "https://drive.google.com/file/d/11YFbUtcDlGFbOu_1wNiCiKTveIXfThPa/view?usp=drive_link", "type": "video", "source": "Fuente: Cortesía de Pexels" },
+      { "tag": "(imagen 4)", "url": "https://drive.google.com/file/d/1BG_K2iWroYKnFgw3hgCR_ESCYbZDRKf0/view?usp=drive_link", "type": "image" },
+      { "tag": "(imagen 5)", "url": "https://drive.google.com/file/d/1jEOAHwwZBgX0oJ9TX6ENFZoaAN7ZcEic/view?usp=drive_link", "type": "image" },
+      { "tag": "(imagen 6)", "url": "https://drive.google.com/file/d/1cJALWW4XlyhDAb9AFyP76dQjCpYVeYN4/view?usp=drive_link", "type": "image" },
+      { "tag": "(imagen 7)", "url": "https://drive.google.com/file/d/18OFKveTNG4tkPJ0x0vJ3k9EALfrF3ir_/view?usp=drive_link", "type": "image" },
+      { "tag": "(imagen 8)", "url": "", "type": "image", "source": "Fuente: Publicación de @abandonatudiego en Facebook" },
+      { "tag": "(Imagen 9 )", "url": "https://drive.google.com/file/d/1THD3CSwAqcRwitUY_VGL5tAkGyEBKyTc/view?usp=drive_link", "type": "image" },
+      { "tag": "(imagen 10)", "url": "https://drive.google.com/file/d/1APglHsFepWlkgBAURxx73OhwdMLRT36j/view?usp=drive_link", "type": "image" },
+      { "tag": "(imagen 11 )", "url": "https://drive.google.com/file/d/1F1SKyE--GHok7rwoUEkJRzc_-5A52nGl/view?usp=drive_link", "type": "image" }
+    ]
+  },
+  {
+    "correo": "diegomartinezsec211@gmail.com",
+    "quitar": ["[Portada.png]", "Fuente: El Mañana", "[Portada_2.jpg]", "Fuente:oem.com.mx"],
+    "media": [
+      { "tag": "[Mexico_sorteo.jpg]", "url": "https://drive.google.com/file/d/10kvrOQAop0VYZ-sP8H83GhyuYoshChr6/view?usp=drive_link", "type": "image", "source": "Fuente: El Universal" },
+      { "tag": "[Donald.png]", "url": "https://drive.google.com/file/d/1B16poaIr7B6MctiTXy6tQiotYhY1qCWN/view?usp=drive_link", "type": "image", "source": "Fuente: Bolavip, LatinUS" },
+      { "tag": "[Cheinbaum.jpg]", "url": "https://drive.google.com/file/d/1oA5Oe8uJZduF49wmmK4Vhd2bU56DSpln/view?usp=drive_link", "type": "image", "source": "Fuente: Bolavip, LatinUS" },
+      { "tag": "[Labubus.jpg]", "url": "https://drive.google.com/file/d/1T0oBSUHgegdIDESMHEgdzun6yeekaWBD/view?usp=drive_link", "type": "image", "source": "Fuente: X (@peñargrol), Expansion" },
+      { "tag": "[Tik_Tok.jpg]", "url": "https://drive.google.com/file/d/1Xm71micmfb_AL6_GgK-30AnjFbnp6ZII/view?usp=drive_link", "type": "image", "source": "Fuente: X (@peñargrol), Expansion" },
+      { "tag": "[México_goat.jpg]", "url": "https://drive.google.com/file/d/1U-3l0qHpOOZrYqQLlHh0h_5pFdbYD37n/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[La_revancha.jpg]", "url": "https://drive.google.com/file/d/13EHIPxoVyENU3urUKiEE_bI5Qr_2tcPy/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Chavito.jpg]", "url": "https://drive.google.com/file/d/1aA6a0jr77xGuYzRldndcX1E8DxRZ1Yhb/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Ecuador.jpg]", "url": "https://drive.google.com/file/d/1wf4DIDYjGdv0NEUoTgRhkoaJTUP2bEgA/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Aficionados.jpg]", "url": "https://drive.google.com/file/d/18aNQe5xdS6L04FViLba2RMIBufudHT5c/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Morita.jpg]", "url": "https://drive.google.com/file/d/180FSYOQxzOBlpWww0dfUg2bSZRWmr0e_/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Vegetta.jpg]", "url": "https://drive.google.com/file/d/1Mr7-e2buotXA1b8WTX6JmB5aWRLRXJbc/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Irán.jpg]", "url": "https://drive.google.com/file/d/1dmErcvGmSHpMhQwi-txIOpbwnKQpZ3am/view?usp=drive_link", "type": "image", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[México_SIUUUUU.mp4]", "url": "https://drive.google.com/file/d/1FGyrNeN6dlBh1C00lWxH22Q6qp9ewFKN/view?usp=drive_link", "type": "video", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Peter_Griffin.mp4]", "url": "https://drive.google.com/file/d/11RhqLVzyXlglR0REMi3dIcHaWbP7WZb1/view?usp=drive_link", "type": "video", "source": "Fuente: WhatsApp (La radio de Ado)" },
+      { "tag": "[Coreanos_en_México.mp4]", "url": "https://drive.google.com/file/d/1Z4CRd_OaKJdlyl5i89fNhar4G0hb5Pxm/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Llari Kdramalover, Pepe Pérez, Edward)" },
+      { "tag": "[Invasión-coreana.mp4]", "url": "", "type": "video", "source": "Fuente: YouTube (Llari Kdramalover, Pepe Pérez, Edward)" },
+      { "tag": "[Coreanos_be_like.mp4]", "url": "https://drive.google.com/file/d/1hzHzln1CERC1F6BTG3QdfY9fy821m9mo/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Llari Kdramalover, Pepe Pérez, Edward)" },
+      { "tag": "[Imagen.mp4]", "url": "https://drive.google.com/file/d/1TCFObK1fJt15iB9490s3o5LnTmUE48g_/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Grupo Reforma, Imagen Noticias, Tele Urban Deportes)" },
+      { "tag": "[Mañanera.mp4]", "url": "https://drive.google.com/file/d/1a3vXx6_XDLvdxLqnD01RKSJyX12EmNYG/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Grupo Reforma, Imagen Noticias, Tele Urban Deportes)" },
+      { "tag": "[El_tri.mp4]", "url": "https://drive.google.com/file/d/1Zpe7UpK3HCVW3dAUBgTAK_yDYtsBfUSH/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Grupo Reforma, Imagen Noticias, Tele Urban Deportes)" },
+      { "tag": "[Amor.jpg]", "url": "https://drive.google.com/file/d/1-Pq_6nt9m88WgaCLQtyVHKvq7JBh9Ci6/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Pitchside Cuts) WhatsApp (La radio de Ado)" },
+      { "tag": "[Esto_es_amor.jpg]", "url": "https://drive.google.com/file/d/19jgrVCIiYK4Z3OKpBvob2XqMV65DAC6p/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Pitchside Cuts) WhatsApp (La radio de Ado)" },
+      { "tag": "[Hajime_Moriyasu.jpg]", "url": "https://drive.google.com/file/d/1bF4M2Jqmx9x6WXC4X_47b-q9IQKD33le/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Pitchside Cuts) WhatsApp (La radio de Ado)" },
+      { "tag": "[AiAiA.mp4]", "url": "https://drive.google.com/file/d/1h3pSHexHstOTh6OwnWLAaSpCCosD9EPq/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Pitchside Cuts) WhatsApp (La radio de Ado)" },
+      { "tag": "[Supercampeones_2.png]", "url": "https://drive.google.com/file/d/1CFjQYK8gKZxS9zfFIjs9MJTkgav_O12n/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Pitchside Cuts) WhatsApp (La radio de Ado)" },
+      { "tag": "[Paraguay.mp4]", "url": "https://drive.google.com/file/d/1tcYQ1vVm5TkDKGBB93kWY5pTC9V3mQAm/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Novaxs) Instagram (Canal Cordoba, geekstream) Facebook (El Rayo Aduanero, SierTv)" },
+      { "tag": "[Paraguay_eliminó_a_Alemania.mp4]", "url": "https://drive.google.com/file/d/1kWhabVvj3b3asIgWcNhC1U_NcqE59nh4/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Novaxs) Instagram (Canal Cordoba, geekstream) Facebook (El Rayo Aduanero, SierTv)" },
+      { "tag": "[Malcolm.jpg]", "url": "https://drive.google.com/file/d/1l7r9c4FYW7tIsNWvUpxd5iqHUO_nQ1AU/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Novaxs) Instagram (Canal Cordoba, geekstream) Facebook (El Rayo Aduanero, SierTv)" },
+      { "tag": "[Poh.jpg]", "url": "https://drive.google.com/file/d/1YPUOTn5xbInhP4tWiXytYRPYVSC9EOxk/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Novaxs) Instagram (Canal Cordoba, geekstream) Facebook (El Rayo Aduanero, SierTv)" },
+      { "tag": "[Tim_Payne.mp4]", "url": "https://drive.google.com/file/d/1X6RMxHItzj41YBMe_eVqnWFJHNqMexs8/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Aesio92), Emprendedor" },
+      { "tag": "[NZ.jpg]", "url": "https://drive.google.com/file/d/1j9pqDImTeTpjI9CWl_qRuVuHsWo9yTMw/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Aesio92), Emprendedor" },
+      { "tag": "[Gillette.jpg]", "url": "https://drive.google.com/file/d/1idtXm5ojaEQiiPPW5wBTExu5gGmerkJZ/view?usp=drive_link", "type": "image", "source": "Fuente: Instagram (venezuelatogo1, record_portugal) Facebook (CRM Noticias)" },
+      { "tag": "[Heinz.jpg]", "url": "https://drive.google.com/file/d/1EHDrPCSQKiLLyWjR6QFxdIP9mD6NFwJO/view?usp=drive_link", "type": "image", "source": "Fuente: Instagram (venezuelatogo1, record_portugal) Facebook (CRM Noticias)" },
+      { "tag": "[Doof.jpg]", "url": "https://drive.google.com/file/d/1I5rTan_JVqlZZrIRANFLoAWZxEsVsu1T/view?usp=drive_link", "type": "image", "source": "Fuente: Instagram (venezuelatogo1, record_portugal) Facebook (CRM Noticias)" },
+      { "tag": "[Shmirtz.jpg]", "url": "https://drive.google.com/file/d/1XyoQkW2SpmUIoKOTK7YSk_8KmeDYsCYx/view?usp=drive_link", "type": "image", "source": "Fuente: Instagram (venezuelatogo1, record_portugal) Facebook (CRM Noticias)" },
+      { "tag": "[Levis.jpg]", "url": "https://drive.google.com/file/d/17eHcly-mH8IAgzJ2vbnZrbI5B1tr2-EJ/view?usp=drive_link", "type": "image", "source": "Fuente: Instagram (venezuelatogo1, record_portugal) Facebook (CRM Noticias)" },
+      { "tag": "[Aliens.mp4]", "url": "https://drive.google.com/file/d/1z1DIqgB1sE9zsLAlcyswyf46pV2Gpy5o/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Aesio92, David Sin Filtro, Ricardo Baldayo Dimensión Paranormal 380)" },
+      { "tag": "[Alien.mp4]", "url": "https://drive.google.com/file/d/11G0l4LyUw1MqGbwfE3e5xJt1LgxVzspf/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Aesio92, David Sin Filtro, Ricardo Baldayo Dimensión Paranormal 380)" },
+      { "tag": "[Invasion.mp4]", "url": "https://drive.google.com/file/d/16zr5pyOhRDf56zO0gXiJ82cX6KoPPQrX/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Aesio92, David Sin Filtro, Ricardo Baldayo Dimensión Paranormal 380)" },
+      { "tag": "[Random.mp4]", "url": "https://drive.google.com/file/d/1z_GqxNGmAplv7F4KYhcQgTaRQq3u-hF3/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Aesiio92) Facebook (Gilberto Haaz Diez) WhatsApp (La radio de Ado)" },
+      { "tag": "[Random_2.mp4]", "url": "https://drive.google.com/file/d/1jSYdgNH-HveiFQiPhpZJK8AmOGOwNYlf/view?usp=drive_link", "type": "video", "source": "Fuente: YouTube (Aesiio92) Facebook (Gilberto Haaz Diez) WhatsApp (La radio de Ado)" },
+      { "tag": "[Pausa.jpg]", "url": "https://drive.google.com/file/d/1jFJLeKYCHaq93laMPaLhgLhMAHjBRFlM/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Aesiio92) Facebook (Gilberto Haaz Diez) WhatsApp (La radio de Ado)" },
+      { "tag": "[Tufomash.jpg]", "url": "https://drive.google.com/file/d/1LMXhnuSDnZQgh7cYIrBvAH6v1fTwi9v2/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Aesiio92) Facebook (Gilberto Haaz Diez) WhatsApp (La radio de Ado)" },
+      { "tag": "[Caguama.jpg]", "url": "https://drive.google.com/file/d/1pxpFQVVSBbM3GMWFamND4EaMkntwJCCN/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Aesiio92) Facebook (Gilberto Haaz Diez) WhatsApp (La radio de Ado)" },
+      { "tag": "[Messi.jpg]", "url": "https://drive.google.com/file/d/17KAi4Jkw2o0M6BI7dZ1xEjBQ1g4MzXhN/view?usp=drive_link", "type": "image", "source": "Fuente: YouTube (Aesiio92) Facebook (Gilberto Haaz Diez) WhatsApp (La radio de Ado)" },
+      { "tag": "[Tradicion.jpg]", "url": "https://drive.google.com/file/d/1u09SvdMVmdf02NSEFrtNqk-csPtX7h6v/view?usp=drive_link", "type": "image", "source": "Fuente: TN" },
+      { "tag": "[Albums.jpg]", "url": "https://drive.google.com/file/d/1tu9Vhm9Pmg7KN1-M82MZBtX1Ptv7ggJe/view?usp=drive_link", "type": "image", "source": "Fuente: El Sol de México" },
+      { "tag": "[Estampas.jpg]", "url": "https://drive.google.com/file/d/1R-yxTAgtp8GN8Z_1oQ1w5xU4YtSEZAFD/view?usp=drive_link", "type": "image", "source": "Fuente: El Economista" }
+    ]
+  },
+  {
+    "correo": "barriosramses6@gmail.com",
+    "quitar": ["[Portada_1.jpg]", "(Imagen generada con IA) (Gemini)"],
+    "media": [
+      { "tag": "[IMAGEN_1.jpg]", "url": "https://drive.google.com/file/d/1j3DKoHEt47RxHZ_Sbcokjl9_hJr3li8a/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (Gemini)" },
+      { "tag": "[IMAGEN_2.jpg]", "url": "https://drive.google.com/file/d/1jiiAK_R0Ch6LeiihKYMzfvEyi3QU03xK/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (Gemini)" },
+      { "tag": "[IMAGEN_6.jpg]", "url": "https://drive.google.com/file/d/1Q1INVe0fqYlKzFWBNihPgJpPOtFCwg9B/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (Grok)" },
+      { "tag": "[IMAGEN_5.jpg]", "url": "https://drive.google.com/file/d/1clAruMvKzDwNWsn3XrCQtRZ6tfw9n5fV/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (Grok)" },
+      { "tag": "IMAGEN_5.1.jpg", "url": "https://drive.google.com/file/d/1dGs2b9STZfuDsaFRMMb6QPXyBfOt3P_H/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (Grok)" },
+      { "tag": "[IMAGEN_7.jpg]", "url": "https://drive.google.com/file/d/1u9dLTsiXaZhAB46sjiLDrwiKyFZsADN-/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (Grok)" },
+      { "tag": "[VIDEO_2.mp4]", "url": "https://drive.google.com/file/d/1bHsAKLAkB21GLk3c_8KjMq4gsxFD72ta/view?usp=drive_link", "type": "video", "source": "Fuente: Video de YouTube" },
+      { "tag": "[IMAGEN_3.jpg]", "url": "https://drive.google.com/file/d/1x5X0XDTrO5fiA7-E51s7aSJBmxo7BMu3/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (Gemini)" },
+      { "tag": "[IMAGEN_4.jpg]", "url": "https://drive.google.com/file/d/1GZa9KGj6-9MRgA3z6WOHZ0QQITCQbWlF/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen de facebook" },
+      { "tag": "[IMAGEN_4.1.jpg]", "url": "https://drive.google.com/file/d/1TCJWq1w6hXrUfXiFrO2UPbosycShGBjD/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen de facebook" },
+      { "tag": "[VIDEO_1.mp4]", "url": "https://drive.google.com/file/d/1RNL3juXkjBtnEf-MgmL-CtuEfBWYRKS1/view?usp=drive_link", "type": "video", "source": "Fuente: Video de YouTube" }
+    ]
+  },
+  {
+    "correo": "daniela.jimenez@cua.uam.mx",
+    "quitar": ["Por: Daniela Sofía Jiménez Olvera"],
+    "media": [
+      { "tag": "[Imagen_03]", "url": "https://drive.google.com/file/d/1bGCT1-a6N5F7om4vbx7WpfEYw8VzGOMq/view?usp=drive_link", "type": "image", "source": "Fuente: Coca-cola" },
+      { "tag": "[Imagen_04]", "url": "https://drive.google.com/file/d/1UabDthFsxM9ueSusNo8unHg9I3kBgASe/view?usp=drive_link", "type": "image", "source": "Fuente: Panini" },
+      { "tag": "[Imagen_02]", "url": "https://drive.google.com/file/d/1Vcdn9Egw38C7fJe4th1lm_wSvEQqEvKZ/view?usp=drive_link", "type": "image", "source": "Fuente: Levi's Mexico Instagram" },
+      { "tag": "[Imagen_01]", "url": "https://drive.google.com/file/d/1jylIiB_VPMH0uBRfH-iVAnMMhorarhXe/view?usp=drive_link", "type": "image", "source": "Fuente: Publisitios" },
+      { "tag": "[Imagen_05]", "url": "https://drive.google.com/file/d/1lORcLt0J6WUZsJzthU8YGvgnrt7UD7lj/view?usp=drive_link", "type": "image", "source": "Fuente: El Universal" },
+      { "tag": "[Imagen_06]", "url": "https://drive.google.com/file/d/16OgV8lsHhSnP5HTERROwUaFYV_VOPH1_/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen generada con IA (ChatGPT)" }
+    ]
+  },
+  {
+    "correo": "Ian.campos@cua.uam.mx",
+    "quitar": [],
+    "media": [
+      { "tag": "Agregar imagen 1", "url": "https://drive.google.com/file/d/1FBaQ9URk7b4xZCQ1bb4bFXpQFc0hAPHj/view?usp=drive_link", "type": "image", "source": "Fuente: INSTAGRAM" },
+      { "tag": "Agregar imagen 2", "url": "https://drive.google.com/file/d/1xW4C4c18TNHjHaEbWaPwhi0Krd7K0Us7/view?usp=drive_link", "type": "image", "source": "Fuente: CHAT GPT" },
+      { "tag": "Agregar imagen 3", "url": "https://drive.google.com/file/d/14BTTmX4mPl0rHzkzK1jeOQmts_RMPav0/view?usp=drive_link", "type": "image", "source": "Fuente: Chat GPT" },
+      { "tag": "Agregar imagen 4", "url": "https://drive.google.com/file/d/10dzMNKyqampEB9-XUWAn3oouf0065t3P/view?usp=drive_link", "type": "image", "source": "Fuente: Chat GPT" },
+      { "tag": "Agregar imagen 5", "url": "https://drive.google.com/file/d/1J9MNhcJQLp5mV55s6mph6TNSifVaMSUs/view?usp=drive_link", "type": "image", "source": "Fuente: el financiero" },
+      { "tag": "Agregar imagen 6", "url": "https://drive.google.com/file/d/1UsnnMogpOXj3kXuSJxQ7Lj-lYXKj2jwM/view?usp=drive_link", "type": "image", "source": "Fuente: los 49mexico" },
+      { "tag": "Agregar imagen 7", "url": "https://drive.google.com/file/d/1qQaD-nFu_HZWt8VR3OKw3stuFvdVEtBE/view?usp=drive_link", "type": "image", "source": "Fuente: diario del istmo" },
+      { "tag": "Agregar imagen final 8", "url": "https://drive.google.com/file/d/1RMc0EwgBRSSBDu2Zr4s8fDFmXoWHAQum/view?usp=drive_link", "type": "image", "source": "Fuente: la times" }
+    ]
+  },
+  {
+    "correo": "Elisa.grimaldo@cua.uam.mx",
+    "quitar": [],
+    "media": [
+      { "tag": "[img_01]", "url": "https://drive.google.com/file/d/1PucPpqbhPDrdinHNGXWv95w6dpDNKXtk/view?usp=drive_link", "type": "image", "source": "Fuente: getdaytrends.com" },
+      { "tag": "[img_02]", "url": "https://drive.google.com/file/d/1fV1E88gzHLpo6EEtrim_9F1g1DcMKzYB/view?usp=drive_link", "type": "image", "source": "Fuente: getdaytrends.com" },
+      { "tag": "[img_03]", "url": "https://drive.google.com/file/d/115ccKuy8EWcqBjpXlC8d3LcB7bvk-ab-/view?usp=drive_link", "type": "image", "source": "Fuente: getdaytrends.com" },
+      { "tag": "[img_04]", "url": "https://drive.google.com/file/d/1k6OA0tS1HrVSkPlqRWn--KCI6ad5MA1Z/view?usp=drive_link", "type": "image", "source": "Fuente: getdaytrends.com" },
+      { "tag": "[img_05]", "url": "https://drive.google.com/file/d/15BRpmLe7T8a8V9WrP3eoQmwYXtfAwmPI/view?usp=drive_link", "type": "image", "source": "Fuente: pressreader.com" },
+      { "tag": "[img_5.1]", "url": "https://drive.google.com/file/d/1ePHXEQd2xgPtJ3TeLhPepRlNETaxqDvD/view?usp=drive_link", "type": "image", "source": "Fuente: pressreader.com" },
+      { "tag": "[img_06]", "url": "https://drive.google.com/file/d/1uHrnzPr29JnESUceFo-E46f2CUJr6OCS/view?usp=drive_link", "type": "image", "source": "Fuente: pressreader.com" },
+      { "tag": "[img_6.1]", "url": "https://drive.google.com/file/d/14EL-cxBIMVNLkEJk0-CT6mNtbLQJIY5c/view?usp=drive_link", "type": "image", "source": "Fuente: pressreader.com" },
+      { "tag": "[img_07]", "url": "https://drive.google.com/file/d/1umKz9HzYLitDbKMPGySVDjlEBj_JhSSv/view?usp=drive_link", "type": "image", "source": "Fuente: pressreader.com" },
+      { "tag": "[img_7.1]", "url": "https://drive.google.com/file/d/1umOmKvy6IeQRhInUr8nTWfRvK57ZYUmp/view?usp=drive_link", "type": "image", "source": "Fuente: pressreader.com" }
+    ]
+  },
+  {
+    "correo": "angel.quintero@cua.uam.mx",
+    "quitar": ["Por Angel Quintero."],
+    "media": [
+      { "tag": "imagen", "url": "https://drive.google.com/file/d/18sTAjJip-MUqvEUxAs83RCyspgv1__IH/view?usp=drive_link", "type": "image" },
+      { "tag": "imagen", "url": "https://drive.google.com/file/d/1e-mMWf6dAB9XFuCVYnZ_x3fxdT7SrBy5/view?usp=drive_link", "type": "image" },
+      { "tag": "imagen.", "url": "https://drive.google.com/file/d/1rWlO_J3E3u-5wJ4R-3V9-fU3UuK3Tz4Q/view?usp=drive_link", "type": "image" },
+      { "tag": "IMAGEN", "url": "https://drive.google.com/file/d/17aIqR-00wzF9vJ-W_tZ1Kizt-96pBv8q/view?usp=drive_link", "type": "image" }
+    ]
+  },
+  {
+    "correo": "carlos.l.rivera@cua.uam.mx",
+    "quitar": [],
+    "media": [
+      { "tag": "(Imagen 1 autor:FIFA)", "url": "https://drive.google.com/file/d/1bblYTlaPEFg7_3TgQFvzTkYL9VmqdtIV/view?usp=drive_link", "type": "image", "source": "Fuente: FIFA" },
+      { "tag": "(Imagen 2 autor:ekos)", "url": "https://drive.google.com/file/d/18fB1x-_890JImAXBtZ4oA3ep6RKt51k7/view?usp=drive_link", "type": "image", "source": "Fuente: ekos" },
+      { "tag": "(Imagen 3 Autor:creada con IA)", "url": "https://drive.google.com/file/d/1Dz0FYWtJKwR38hSANbhl0zN2uiKa_DBH/view?usp=drive_link", "type": "image", "source": "Fuente: creada con IA" },
+      { "tag": "(Imagen 4 Autor: Antonio Cuento)", "url": "https://drive.google.com/file/d/1uQFxzY0PdGpsDx6g1P1zxEuWykHNKWLJ/view?usp=drive_link", "type": "image", "source": "Fuente: Antonio Cuento" },
+      { "tag": "(Imagen 5 Autor:creada con IA)", "url": "https://drive.google.com/file/d/1gC_Gf_gMUW5syLk54YiU9AQiwV-7y9ay/view?usp=drive_link", "type": "image", "source": "Fuente: creada con IA" },
+      { "tag": "(Imagen 6 Autor:MVSnoticias)", "url": "https://drive.google.com/file/d/1sxQiev3O2A8lpuBvFRdFmHXjnPeXDS21/view?usp=drive_link", "type": "image", "source": "Fuente: MVSnoticias" },
+      { "tag": "(Imagen 7 Autor: Coca-Cola)", "url": "https://drive.google.com/file/d/1MkZJ3tlLoQQrt8xvoHgU8_SFNmAcRAqx/view?usp=drive_link", "type": "image", "source": "Fuente: Coca-Cola" },
+      { "tag": "(Imagen 8 Autor:Pepsi)", "url": "https://drive.google.com/file/d/1MstD3sELQLUXMu09Qdigko4ZGNuyr38a/view?usp=drive_link", "type": "image", "source": "Fuente: Pepsi" },
+      { "tag": "(Imagen 9 Autor:chilangoMX)", "url": "https://drive.google.com/file/d/1He37vMHvm7ZDKAsSDgT-6WxsindoEZ5F/view?usp=drive_link", "type": "image", "source": "Fuente: chilangoMX" },
+      { "tag": "(Imagen 10 Autor:Forbes)", "url": "https://drive.google.com/file/d/1-Zr_XYA5x9zzb3eLyyf7TZ1LbslCnIJz/view?usp=drive_link", "type": "image", "source": "Fuente: Forbes" },
+      { "tag": "(Imagen 11 Autor: El CEO)", "url": "https://drive.google.com/file/d/10teiM5w9LorzFpSYguPXjux2chrR4jpd/view?usp=drive_link", "type": "image", "source": "Fuente: El CEO" }
+    ]
+  },
+  {
+    "correo": "samuelmijangos24@gmail.com",
+    "quitar": ["Autor: Samuel Mijangos Linares."],
+    "media": [
+      { "tag": "[Imagen 1.jpg]", "url": "https://drive.google.com/file/d/1_6QFTPnFHVoVRxTli-HgNc3IZsJ0r66y/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 2.jpg]", "url": "https://drive.google.com/file/d/1exrdXgGSUNoHLgm6vIV6PDXfrZn3M2rc/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 3.jpg]", "url": "https://drive.google.com/file/d/1G7WnI6e3VLlq33DNnyAVOJhLeYsvWhJe/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 4.jpg]", "url": "https://drive.google.com/file/d/1mLazgVHPIAYVuQf8UzJuBc37mn76-mw8/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 5.jpg]", "url": "https://drive.google.com/file/d/1XtR4AOUj3RnTFGZnNZr2-3CDSZ3X6zWh/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 6.jpg]", "url": "https://drive.google.com/file/d/1vTXJb3wNBE9qRoDO0em2vLPEZHVWyJ_T/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 7.jpg]", "url": "https://drive.google.com/file/d/1K6w8bwVb_vyHTvJH_iBDjXnorEdo4taV/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 8.jpg]", "url": "https://drive.google.com/file/d/1pJ_IcVl5Ys1Il-6pSYEelwecJdpFwfwA/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 9.jpg]", "url": "https://drive.google.com/file/d/19IH1uMiJNtBOAu_msKaqtBGkPGh8cBDR/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 10.jpg]", "url": "https://drive.google.com/file/d/1F5CABoptLeQQu63HNj8Ae5tbiATTKfYk/view?usp=drive_link", "type": "image" },
+      { "tag": "[Imagen 11.jpg]", "url": "https://drive.google.com/file/d/1ih8-J4seJsu4Ks3eJvKCdzU_CxvDQlSm/view?usp=drive_link", "type": "image" }
+    ]
+  },
+  {
+    "correo": "gaelcor17@gmail.com",
+    "quitar": [],
+    "media": [
+      { "tag": "[Imagen_1.jpg]", "url": "https://drive.google.com/file/d/1xX_cxRtUpZWUVW6oUuDsVyWkad9kYsd_/view?usp=drive_link", "type": "image", "source": "Fuente: Editorial 365 Scores redactado por Fernando Esquivel foto tomada de su perfil de X 23 de mayo de 2026" },
+      { "tag": "[Imagen_2.jpg]", "url": "https://drive.google.com/file/d/1rguJFh3bMngTwW2gugJyCqHd126TgaVm/view?usp=drive_link", "type": "image", "source": "Fuente: Reto Diario, tomada de la página web 24 de junio de 2026" },
+      { "tag": "[Imagen_3.jpg]", "url": "https://drive.google.com/file/d/1SbLcm30PqFaVJtczqIsupG_KUabKIT0Z/view?usp=drive_link", "type": "image", "source": "Fuente: N+ Univisión tomada de la página web oficial 15 de junio de 2026" },
+      { "tag": "[Imagen_4.jpg]", "url": "https://drive.google.com/file/d/1fIED5btaj5s3MkCFRbjniMiv0aqf6q7B/view?usp=drive_link", "type": "image", "source": "Fuente: Imagen creada mediante IA por BCT neus 6 de junio de 2026 (tomada de su perfil de Instagram)" },
+      { "tag": "[Imagen_5.jpg]", "url": "https://drive.google.com/file/d/1mxQFPkIVKCAI_G1UZoHxwBotu0RhLVTK/view?usp=drive_link", "type": "image", "source": "Fuente: @iranin_arabic tomada de su perfil oficial de X 24 de junio de 2026" }
+    ]
+  }
+]

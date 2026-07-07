@@ -2,10 +2,21 @@ const express = require('express');
 const cors = require('cors');
 const { google } = require('googleapis');
 const https = require('https');
+const fs = require('fs');
+const path = require('path');
 require('dotenv').config();
 
 const app = express();
 app.use(cors());
+
+// Cargar mediaMappings
+let mediaMappings = [];
+try {
+  const mappingsPath = path.join(__dirname, 'mediaMappings.json');
+  mediaMappings = JSON.parse(fs.readFileSync(mappingsPath, 'utf-8'));
+} catch (e) {
+  console.error("No se pudo cargar mediaMappings.json:", e.message);
+}
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
@@ -48,7 +59,7 @@ app.get('/api/investigaciones', async (req, res) => {
     const sheetName = spreadsheet.data.sheets[0].properties.title;
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${sheetName}!A2:G`,
+      range: `${sheetName}!A2:H`,
     });
     const rows = response.data.values;
     if (!rows || rows.length === 0) return res.json([]);
@@ -61,7 +72,8 @@ app.get('/api/investigaciones', async (req, res) => {
         titulo: row[3] || 'Sin título',
         documentos: parseLinks(row[4]),
         imagenes: parseLinks(row[5]),
-        videos: parseLinks(row[6])
+        videos: parseLinks(row[6]),
+        portada: row[7] ? (row[7].startsWith('/imagenes') ? row[7] : extractDriveId(row[7])) : null
       };
     });
     res.json(investigaciones);
@@ -72,9 +84,9 @@ app.get('/api/investigaciones', async (req, res) => {
 });
 
 // NUEVO: Endpoint para extraer el contenido del documento de Google Docs
-app.get('/api/investigacion/:tema', async (req, res) => {
+app.get('/api/investigacion/:id', async (req, res) => {
   try {
-    const temaBuscado = decodeURIComponent(req.params.tema);
+    const param = decodeURIComponent(req.params.id);
     const client = await auth.getClient();
     const sheets = google.sheets({ version: 'v4', auth: client });
     const docs = google.docs({ version: 'v1', auth: client });
@@ -84,21 +96,29 @@ app.get('/api/investigacion/:tema', async (req, res) => {
     const sheetName = spreadsheet.data.sheets[0].properties.title;
     const response = await sheets.spreadsheets.values.get({
       spreadsheetId: SPREADSHEET_ID,
-      range: `${sheetName}!A2:G`,
+      range: `${sheetName}!A2:H`,
     });
     
     const rows = response.data.values || [];
-    const row = rows.find(r => r[0].trim().toLowerCase() === temaBuscado.trim().toLowerCase());
+    let row;
+    if (!isNaN(param) && Number.isInteger(parseFloat(param))) {
+      const targetId = parseInt(param, 10);
+      row = rows[targetId - 1];
+    } else {
+      row = rows.find(r => r[0] && r[0].trim().toLowerCase() === param.trim().toLowerCase());
+    }
     
-    if (!row) return res.status(404).json({ error: 'Tema no encontrado' });
+    if (!row) return res.status(404).json({ error: 'Investigación no encontrada' });
 
     const data = {
       tema: row[0] || 'Sin tema',
       autor: row[1] || 'Anónimo',
+      correo: row[2] || '',
       titulo: row[3] || 'Sin título',
       documentos: parseLinks(row[4]),
       imagenes: parseLinks(row[5]),
-      videos: parseLinks(row[6])
+      videos: parseLinks(row[6]),
+      portada: row[7] ? (row[7].startsWith('/imagenes') ? row[7] : extractDriveId(row[7])) : null
     };
 
     if (data.documentos.length === 0) {
@@ -136,29 +156,85 @@ app.get('/api/investigacion/:tema', async (req, res) => {
     const blocks = [];
     const lines = fullText.split('\n');
 
+    const authorMapping = mediaMappings.find(m => m.correo === data.correo);
+    let availableMedia = (authorMapping && authorMapping.media) ? [...authorMapping.media] : [];
+
     for (const line of lines) {
       const text = line.trim();
       if (!text) continue;
 
-      // Buscar si es etiqueta de IMAGEN (ej. [IMAGEN_1.jpg] o [IMAGEN_1])
+      // 1. Revisar exclusiones ("QUITAR")
+      if (authorMapping && authorMapping.quitar && authorMapping.quitar.length > 0) {
+        const shouldSkip = authorMapping.quitar.some(q => text.toLowerCase().includes(q.toLowerCase()));
+        if (shouldSkip) continue;
+      }
+
+      // 2. Revisar si la línea contiene un tag multimedia exacto
+      if (availableMedia.length > 0) {
+        let textToProcess = text;
+        let processedAny = false;
+        
+        while (textToProcess) {
+           let earliestIndex = -1;
+           let earliestTagPos = textToProcess.length;
+           
+           for (let i = 0; i < availableMedia.length; i++) {
+              const m = availableMedia[i];
+              const pos = textToProcess.indexOf(m.tag);
+              if (pos !== -1 && pos < earliestTagPos) {
+                  earliestTagPos = pos;
+                  earliestIndex = i;
+              }
+           }
+           
+           if (earliestIndex !== -1) {
+              const m = availableMedia[earliestIndex];
+              const beforeTag = textToProcess.substring(0, earliestTagPos);
+              const afterTag = textToProcess.substring(earliestTagPos + m.tag.length);
+              
+              if (beforeTag.trim()) {
+                  blocks.push({ type: 'text', content: beforeTag.trim() });
+              }
+              
+              const driveId = extractDriveId(m.url);
+              if (driveId) {
+                  if (m.type === 'image') blocks.push({ type: 'image', url: `http://localhost:5000/api/image/${driveId}`, source: m.source || '' });
+                  if (m.type === 'video') blocks.push({ type: 'video', url: `https://drive.google.com/file/d/${driveId}/preview`, source: m.source || '' });
+              }
+              
+              textToProcess = afterTag;
+              processedAny = true;
+              availableMedia.splice(earliestIndex, 1);
+           } else {
+              break;
+           }
+        }
+        
+        if (processedAny) {
+           if (textToProcess.trim()) {
+              blocks.push({ type: 'text', content: textToProcess.trim() });
+           }
+           continue; // Ya procesamos esta línea
+        }
+      }
+
+      // Fallback antiguo: Buscar si es etiqueta de IMAGEN (ej. [IMAGEN_1.jpg] o [IMAGEN_1])
       const matchImagen = text.match(/\[IMAGEN_(\d+)/i);
       if (matchImagen) {
         const index = parseInt(matchImagen[1], 10) - 1; // Array es 0-indexed
         if (data.imagenes[index]) {
           const imgId = extractDriveId(data.imagenes[index]);
-          // En lugar de enviar un link de Google, enviamos un link a nuestro propio servidor (proxy)
           blocks.push({ type: 'image', url: `http://localhost:5000/api/image/${imgId}` });
         }
         continue;
       }
 
-      // Buscar si es etiqueta de VIDEO (ej. [VIDEO_1.mp4] o [VIDEO_1])
+      // Fallback antiguo: Buscar si es etiqueta de VIDEO (ej. [VIDEO_1.mp4] o [VIDEO_1])
       const matchVideo = text.match(/\[VIDEO_(\d+)/i);
       if (matchVideo) {
         const index = parseInt(matchVideo[1], 10) - 1;
         if (data.videos[index]) {
           const vidId = extractDriveId(data.videos[index]);
-          // Reproductor incrustado optimizado
           blocks.push({ type: 'video', url: `https://drive.google.com/file/d/${vidId}/preview` });
         }
         continue;
@@ -167,6 +243,11 @@ app.get('/api/investigacion/:tema', async (req, res) => {
       // Si no es etiqueta, es texto
       blocks.push({ type: 'text', content: text });
     }
+    
+    // Agregar Autor y Contacto al final del documento
+    blocks.push({ type: 'text', content: '---' });
+    blocks.push({ type: 'text', content: `Escrito por: ${data.autor}` });
+    blocks.push({ type: 'text', content: `Contacto: ${data.correo}` });
 
     res.json({ metadata: data, blocks });
 

@@ -56,41 +56,90 @@ export default function Investigacion({ isDark, toggleTheme }) {
       );
     }
 
+    // Agrupar bloques consecutivos multimedia
+    const groupedBlocks = [];
+    for (let i = 0; i < blocks.length; i++) {
+       const b = blocks[i];
+       if (b.type === 'image' || b.type === 'video') {
+         const group = [b];
+         while (i + 1 < blocks.length && (blocks[i+1].type === 'image' || blocks[i+1].type === 'video')) {
+           group.push(blocks[i+1]);
+           i++;
+         }
+         groupedBlocks.push({ type: 'media_group', items: group });
+       } else {
+         groupedBlocks.push(b);
+       }
+    }
+
     return (
       <div className="space-y-6 text-lg text-stone-800 dark:text-stone-300 leading-relaxed font-serif">
-        {blocks.map((block, index) => {
+        {groupedBlocks.map((block, index) => {
           if (block.type === 'text') {
             // Un pequeño truco para detectar títulos (ej: "La Evolución de la Seguridad y el Acceso")
             const isHeading = block.content.length < 80 && !block.content.endsWith('.') && !block.content.endsWith(',') && !block.content.includes(':');
             
             // Ignorar el Autor del documento original (ya lo mostramos arriba)
-            if (block.content.toLowerCase().includes('autor:')) return null;
+            if (block.content.toLowerCase().startsWith('autor:')) return null;
+
+            if (block.content === '---') {
+              return <hr key={index} className="my-12 border-stone-200 dark:border-stone-800" />;
+            }
+            if (block.content.startsWith('Escrito por:')) {
+              return <p key={index} className="text-xl font-bold text-stone-900 dark:text-stone-100 mt-8">{block.content}</p>;
+            }
+            if (block.content.startsWith('Contacto:')) {
+              return (
+                <p key={index} className="text-md text-emerald-600 dark:text-emerald-400 font-medium mb-12">
+                  <a href={`mailto:${block.content.replace('Contacto: ', '').trim()}`} className="hover:underline">
+                    {block.content}
+                  </a>
+                </p>
+              );
+            }
 
             if (isHeading && index !== blocks.length - 1) {
               return <h2 key={index} className="text-3xl font-bold text-stone-900 dark:text-stone-100 mt-12 mb-6 leading-tight">{block.content}</h2>;
             }
             return <p key={index}>{block.content}</p>;
           }
-          if (block.type === 'image') {
+          
+          if (block.type === 'media_group') {
+            const isSingle = block.items.length === 1;
+            const gridClass = isSingle 
+              ? 'columns-1' 
+              : block.items.length === 2 
+                ? 'grid grid-cols-1 md:grid-cols-2 gap-6'
+                : 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6';
+
             return (
-              <figure key={index} className="my-10 rounded-2xl overflow-hidden shadow-xl border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
-                <img src={block.url} alt="Evidencia visual" className="w-full h-auto object-cover max-h-[700px]" loading="lazy" />
-              </figure>
-            );
-          }
-          if (block.type === 'video') {
-            return (
-              <div key={index} className="my-10 relative w-full aspect-video rounded-2xl overflow-hidden shadow-xl border border-stone-200 dark:border-stone-800 bg-black">
-                <iframe 
-                  src={block.url} 
-                  className="absolute top-0 left-0 w-full h-full border-0" 
-                  allow="autoplay; encrypted-media" 
-                  allowFullScreen
-                  title="Video de investigación"
-                ></iframe>
+              <div key={index} className={`my-12 w-full ${gridClass}`}>
+                {block.items.map((media, mIdx) => (
+                  <figure key={mIdx} className="flex flex-col rounded-2xl overflow-hidden shadow-xl border border-stone-200 dark:border-stone-800 bg-stone-100 dark:bg-stone-900">
+                    {media.type === 'image' ? (
+                      <img src={media.url} alt="Evidencia visual" className="w-full h-auto object-cover max-h-[700px]" loading="lazy" />
+                    ) : (
+                      <div className="relative w-full aspect-video bg-black">
+                        <iframe 
+                          src={media.url} 
+                          className="absolute top-0 left-0 w-full h-full border-0" 
+                          allow="autoplay; encrypted-media" 
+                          allowFullScreen
+                          title="Video de investigación"
+                        ></iframe>
+                      </div>
+                    )}
+                    {media.source && (
+                      <figcaption className="p-4 bg-stone-50 dark:bg-stone-950 text-sm italic text-stone-500 dark:text-stone-400 text-center border-t border-stone-200 dark:border-stone-800">
+                        {media.source}
+                      </figcaption>
+                    )}
+                  </figure>
+                ))}
               </div>
             );
           }
+          
           return null;
         })}
       </div>
