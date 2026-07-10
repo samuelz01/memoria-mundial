@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 
 
 
-const heights = ['h-64', 'h-80', 'h-96'];
-const bgLights = ['bg-stone-100', 'bg-slate-100', 'bg-gray-100', 'bg-zinc-100', 'bg-neutral-100'];
-const bgDarks = ['dark:bg-stone-900', 'dark:bg-slate-900', 'dark:bg-gray-900', 'dark:bg-zinc-900', 'dark:bg-neutral-900'];
-
 const themeColors = [
   'text-rose-600 dark:text-rose-400',
   'text-indigo-600 dark:text-indigo-400',
@@ -19,12 +15,31 @@ const themeColors = [
   'text-orange-600 dark:text-orange-400'
 ];
 
+const themeHoverClasses = [
+  'hover:border-rose-600 hover:text-rose-600 hover:bg-rose-50 dark:hover:border-rose-400 dark:hover:text-rose-400 dark:hover:bg-rose-950/30',
+  'hover:border-indigo-600 hover:text-indigo-600 hover:bg-indigo-50 dark:hover:border-indigo-400 dark:hover:text-indigo-400 dark:hover:bg-indigo-950/30',
+  'hover:border-sky-600 hover:text-sky-600 hover:bg-sky-50 dark:hover:border-sky-400 dark:hover:text-sky-400 dark:hover:bg-sky-950/30',
+  'hover:border-amber-600 hover:text-amber-600 hover:bg-amber-50 dark:hover:border-amber-400 dark:hover:text-amber-400 dark:hover:bg-amber-950/30',
+  'hover:border-emerald-600 hover:text-emerald-600 hover:bg-emerald-50 dark:hover:border-emerald-400 dark:hover:text-emerald-400 dark:hover:bg-emerald-950/30',
+  'hover:border-violet-600 hover:text-violet-600 hover:bg-violet-50 dark:hover:border-violet-400 dark:hover:text-violet-400 dark:hover:bg-violet-950/30',
+  'hover:border-fuchsia-600 hover:text-fuchsia-600 hover:bg-fuchsia-50 dark:hover:border-fuchsia-400 dark:hover:text-fuchsia-400 dark:hover:bg-fuchsia-950/30',
+  'hover:border-orange-600 hover:text-orange-600 hover:bg-orange-50 dark:hover:border-orange-400 dark:hover:text-orange-400 dark:hover:bg-orange-950/30'
+];
+
 const getThemeColor = (tag) => {
   let hash = 0;
   for (let i = 0; i < tag.length; i++) {
     hash = tag.charCodeAt(i) + ((hash << 5) - hash);
   }
   return themeColors[Math.abs(hash) % themeColors.length];
+};
+
+const getThemeHoverClass = (tag) => {
+  let hash = 0;
+  for (let i = 0; i < tag.length; i++) {
+    hash = tag.charCodeAt(i) + ((hash << 5) - hash);
+  }
+  return themeHoverClasses[Math.abs(hash) % themeHoverClasses.length];
 };
 
 const formatTitle = (title) => {
@@ -162,12 +177,15 @@ export default function Home({ isDark, toggleTheme }) {
               description: `Autor: ${formatTitle(t.autor)}`,
               tag: simpleTheme,
               colorClass: getThemeColor(simpleTheme),
-              heightClass: heights[index % heights.length],
-              bgLight: bgLights[index % bgLights.length],
-              bgDark: bgDarks[index % bgDarks.length],
               isFallback: !t.portada
             };
           });
+        
+        // Revolver (shuffle) los elementos aleatoriamente
+        for (let i = formattedItems.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [formattedItems[i], formattedItems[j]] = [formattedItems[j], formattedItems[i]];
+        }
         
         setArchiveItems(formattedItems);
       } catch (error) {
@@ -193,11 +211,14 @@ export default function Home({ isDark, toggleTheme }) {
     const matchedThemes = dynamicThemes.filter(theme => 
       theme.toLowerCase().includes(query)
     );
+    const matchedAuthors = archiveItems
+      .filter(item => item.description.toLowerCase().includes(query))
+      .map(item => item.description.replace('Autor: ', ''));
     const matchedTitles = archiveItems
       .filter(item => item.title.toLowerCase().includes(query))
       .map(item => item.title);
       
-    const combined = Array.from(new Set([...matchedThemes, ...matchedTitles])).slice(0, 8);
+    const combined = Array.from(new Set([...matchedThemes, ...matchedAuthors, ...matchedTitles])).slice(0, 8);
     setSuggestions(combined);
     setShowSuggestions(true);
     setActiveSuggestionIndex(-1);
@@ -287,10 +308,10 @@ export default function Home({ isDark, toggleTheme }) {
                 setSelectedFilter(null);
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="flex flex-shrink-0 items-center gap-3 transition-transform hover:scale-105"
+              className="flex flex-shrink-0 items-center gap-3 transition-transform hover:opacity-80"
             >
-              <img src="/imagenes/logo.webp" className="h-16 w-auto" alt="Memoria Mundial Logo" />
-              <span className="font-serif text-sm font-medium tracking-wider text-stone-600 dark:text-stone-400">Memoria del Mundial</span>
+              <img src="/imagenes/logo.webp" className="h-14 w-auto drop-shadow-sm" alt="Memoria Mundial Logo" />
+              <span className="font-serif text-lg font-semibold tracking-wide text-stone-800 dark:text-stone-200">Memoria del Mundial</span>
             </Link>
             
             <div className="hidden md:flex gap-8 text-sm font-medium">
@@ -433,7 +454,7 @@ export default function Home({ isDark, toggleTheme }) {
                           className={`px-5 py-2 rounded-full border text-sm font-medium transition-all shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 hover:-translate-y-0.5 ${
                             isActive
                               ? 'border-emerald-600 bg-emerald-600 text-white dark:bg-emerald-700 dark:border-emerald-700'
-                              : 'border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 text-stone-700 dark:text-stone-300 hover:bg-stone-100 dark:hover:bg-stone-800'
+                              : `border-stone-200 dark:border-stone-700 bg-white dark:bg-stone-900 text-stone-700 dark:text-stone-300 ${getThemeHoverClass(filter)}`
                           }`}
                         >
                           {filter}
@@ -461,31 +482,32 @@ export default function Home({ isDark, toggleTheme }) {
                     </button>
                   </div>
                 ) : (
-                  <div className="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6">
+                  <div className="columns-1 sm:columns-2 lg:columns-3 gap-8 space-y-8">
                     {filteredItems.map((item) => (
                       <Link 
                         to={`/investigacion/${item.id}`}
                         key={item.id} 
-                        className={`block break-inside-avoid relative group rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 ${item.bgLight} ${item.bgDark} shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer`}
+                        className="block break-inside-avoid relative group rounded-2xl overflow-hidden border border-stone-200 dark:border-stone-800 bg-white dark:bg-[#121214] shadow-sm hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                       >
-                        <div className={`overflow-hidden flex items-center justify-center w-full ${item.heightClass} ${item.isFallback ? 'bg-stone-200 dark:bg-stone-800 p-8' : ''}`}>
+                        <div className={`flex items-center justify-center w-full bg-stone-50 dark:bg-[#1a1a1c] ${item.isFallback ? 'aspect-[4/3] p-8' : ''}`}>
                           <img 
                             src={item.img} 
                             alt={item.title} 
-                            className={`w-full h-full ${item.isFallback ? 'object-contain opacity-40 mix-blend-multiply dark:mix-blend-screen' : 'object-cover'} group-hover:scale-105 transition-all duration-700 ease-in-out ${loadedImages[item.id] ? 'opacity-100 blur-none' : 'opacity-0 blur-md scale-110'}`}
+                            className={`w-full ${item.isFallback ? 'h-full object-contain opacity-30 mix-blend-multiply dark:mix-blend-screen' : 'h-auto object-cover block'} group-hover:scale-105 transition-all duration-700 ease-in-out ${loadedImages[item.id] ? 'opacity-100 blur-none' : 'opacity-0 blur-md scale-110'}`}
                             loading="lazy"
                             onLoad={() => setLoadedImages(prev => ({ ...prev, [item.id]: true }))}
                             onError={(e) => { 
                               e.target.src = '/imagenes/logo.webp';
-                              e.target.className = 'w-full h-full object-contain opacity-40 mix-blend-multiply dark:mix-blend-screen group-hover:scale-105 transition-all duration-700 ease-in-out';
+                              e.target.className = 'w-full h-full object-contain opacity-30 mix-blend-multiply dark:mix-blend-screen group-hover:scale-105 transition-all duration-700 ease-in-out';
+                              e.target.parentElement.classList.add('aspect-[4/3]', 'p-8');
                             }}
                           />
                         </div>
-                        <div className="p-5">
-                          <span className={`text-[10px] uppercase tracking-wider font-semibold mb-2 block transition-colors duration-300 ${item.colorClass}`}>
+                        <div className="p-5 flex flex-col items-center text-center">
+                          <span className={`inline-block px-3 py-1 rounded-full bg-stone-100 dark:bg-stone-800 text-[10px] uppercase tracking-wider font-bold mb-3 transition-colors duration-300 ${item.colorClass}`}>
                             {item.tag}
                           </span>
-                          <h3 className="font-serif text-lg font-medium text-stone-900 dark:text-stone-100 leading-tight mb-2 transition-colors duration-300">
+                          <h3 className="font-sans text-lg font-semibold text-stone-900 dark:text-stone-100 leading-snug mb-2 transition-colors duration-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400">
                             {item.title}
                           </h3>
                           <p className="text-sm text-stone-600 dark:text-stone-400 leading-relaxed transition-colors duration-300">
